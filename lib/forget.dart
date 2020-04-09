@@ -18,10 +18,8 @@ class ListWithTitle extends StatelessWidget {
       {this.containScaffold = true, this.appBar, this.havePadding = true});
   @override
   Widget build(BuildContext context) {
-    return containScaffold
-        ? SafeArea(
-            child: Scaffold(appBar: this.appBar, body: MyBody(title, body)))
-        : MyBody(title, body);
+    return SafeArea(
+        child: Scaffold(appBar: this.appBar, body: MyBody(title, body)));
   }
 }
 

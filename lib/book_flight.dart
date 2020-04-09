@@ -23,56 +23,79 @@ class BookFlight extends StatelessWidget {
     var smallButtontextStyle = textTheme.button.copyWith(
       fontSize: ScreenUtil().setSp(15),
     );
-    return UserRegistirationRoot(
-        'Book This Tour',
-        Column(children: <Widget>[
-          ButtonTheme(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                    Radius.circular(screen.aspectRatioConverter(10)))),
-            height: screen.heightConverter(50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    color: theme.canvasColor,
-                    onPressed: () {
-                      Navigator.pushNamed(context, Login.route);
-                    },
-                    child: Text('Sign in',
-                        style: smallButtontextStyle.copyWith(
-                            color: theme.primaryColorDark)),
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(left: screen.widthConverter(21))),
-                Expanded(
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, SignUp.route);
-                    },
-                    child: Text('Sign up', style: smallButtontextStyle),
-                    color: theme.accentColor,
-                  ),
-                ),
-              ],
+
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(),
+      body: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: screen.heightConverter(20)),
+              child: Text(
+                'Book This Tour',
+                style: textTheme.display2,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: screen.heightConverter(20)),
-          ),
-          MyField('tour', 'Old Jeddah City Tour', () {}),
-          MyField('Date', 'Select Date', () {
-            selectDate(context);
-          }),
-          MyField('Passengers', '2 Adults', () {
-            selectPassengers(context);
-          }),
-        ]),
-        'Booking', () {
-      Navigator.pushNamed(context, CheckOut.route);
-    });
+            ButtonTheme(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(screen.aspectRatioConverter(10)))),
+              height: screen.heightConverter(50),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: FlatButton(
+                      color: theme.canvasColor,
+                      onPressed: () {
+                        Navigator.pushNamed(context, Login.route);
+                      },
+                      child: Text('Sign in',
+                          style: smallButtontextStyle.copyWith(
+                              color: theme.primaryColorDark)),
+                    ),
+                  ),
+                  Padding(
+                      padding:
+                          EdgeInsets.only(left: screen.widthConverter(21))),
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, SignUp.route);
+                      },
+                      child: Text('Sign up', style: smallButtontextStyle),
+                      color: theme.accentColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: screen.heightConverter(20)),
+            ),
+            MyField('tour', 'Old Jeddah City Tour', () {}),
+            MyField('Date', 'Select Date', () {
+              selectDate(context);
+            }),
+            MyField('Passengers', '2 Adults', () {
+              selectPassengers(context);
+            }),
+            FlatButton(
+              onPressed: () {},
+              child: Text('Booking'),
+              color: theme.accentColor,
+            ),
+            Padding(
+                padding: EdgeInsets.only(bottom: screen.heightConverter(20)))
+          ],
+          padding:
+              EdgeInsets.symmetric(horizontal: screen.widthConverter(20.5)),
+        ),
+      ),
+    ));
   }
 }
 
@@ -127,34 +150,36 @@ void selectPassengers(BuildContext context) {
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
     context: context,
-    builder: (_) => Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: screen.widthConverter(20),
-      ),
-      child: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 0),
-              trailing: Text('Done',
-                  style: textTheme.body1.copyWith(
-                      fontSize: ScreenUtil().setSp(15),
-                      color: theme.accentColor,
-                      fontWeight: FontWeight.w700)),
-              title: Text(
-                'Cancel',
-                style:
-                    textTheme.body1.copyWith(fontSize: ScreenUtil().setSp(15)),
+    builder: (_) => StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) => Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: screen.widthConverter(20),
+        ),
+        child: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: ListView(
+            children: <Widget>[
+              ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                trailing: Text('Done',
+                    style: textTheme.body1.copyWith(
+                        fontSize: ScreenUtil().setSp(15),
+                        color: theme.accentColor,
+                        fontWeight: FontWeight.w700)),
+                title: Text(
+                  'Cancel',
+                  style: textTheme.body1
+                      .copyWith(fontSize: ScreenUtil().setSp(15)),
+                ),
               ),
-            ),
-            Divider(
-              height: 0,
-            ),
-            for (var i = 0; i < tiles.length; i++)
-              PassengerTile(tiles[i].title, tiles[i].subTitle, i),
-            Padding(padding: EdgeInsets.only(top: screen.heightConverter(10)))
-          ],
+              Divider(
+                height: 0,
+              ),
+              for (var i = 0; i < tiles.length; i++)
+                PassengerTile(tiles[i].title, tiles[i].subTitle, i, setState),
+              Padding(padding: EdgeInsets.only(top: screen.heightConverter(10)))
+            ],
+          ),
         ),
       ),
     ),
@@ -182,8 +207,8 @@ class PassengerTile extends StatelessWidget {
   String title;
   String subTitle;
   int index;
-
-  PassengerTile(this.title, this.subTitle, this.index);
+  StateSetter setState;
+  PassengerTile(this.title, this.subTitle, this.index, this.setState);
   @override
   Widget build(BuildContext context) {
     Screen screen = Provider.of(context, listen: false);
@@ -209,21 +234,20 @@ class PassengerTile extends StatelessWidget {
                   color: Colors.grey,
                   icon: FontAwesomeIcons.minus,
                   onPressed: () {
-                    tiles[this.index].count--;
+                    if (tiles[this.index].count != 0) {
+                      tiles[this.index].count--;
+
+                      this.setState(() {});
+                    }
                   },
                 ),
-                Text(
-                  tiles[index].count.toString(),
-                  style: sfUiSemi.copyWith(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: screen.aspectRatioConverter(39),
-                  ),
-                ),
+                Text(tiles[index].count.toString(), style: textTheme.display2),
                 MyButton(
                   color: Theme.of(context).accentColor,
                   icon: FontAwesomeIcons.plus,
                   onPressed: () {
                     tiles[this.index].count++;
+                    this.setState(() {});
                   },
                 )
               ],

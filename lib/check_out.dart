@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m/bnv.dart';
 import 'package:m/forget.dart';
 import 'package:m/info.dart';
 import 'package:m/logic.dart';
@@ -15,10 +16,27 @@ class CheckOut extends StatelessWidget {
     var textTheme = theme.textTheme;
     var rowPadding =
         Padding(padding: EdgeInsets.only(left: screen.widthConverter(10)));
-    return UserRegistirationRoot(
-        'Check Out',
-        Column(
+
+    return SafeArea(
+        child: Scaffold(
+            //backgroundColor: Colors.white,
+            body: ScrollConfiguration(
+      behavior: MyBehavior(),
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+            [
+          SliverAppBar(
+            snap: true,
+            floating: true,
+          )
+        ],
+        body: ListView(
+          padding: EdgeInsets.symmetric(horizontal: screen.widthConverter(20)),
           children: <Widget>[
+            Text(
+              'Check Out',
+              style: textTheme.display2,
+            ),
             HeadText(
               'Credit Card Details',
             ),
@@ -66,12 +84,19 @@ class CheckOut extends StatelessWidget {
                 )
               ],
             ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: screen.heightConverter(26.5),
+                  bottom: screen.heightConverter(36)),
+              child: MyFlatButton(
+                text: 'Pay Now',
+                onTap: () {},
+              ),
+            ),
           ],
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
         ),
-        'Pay Now',
-        () {});
+      ),
+    )));
   }
 }
 

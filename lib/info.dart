@@ -338,11 +338,13 @@ class MyFlatButton extends StatelessWidget {
 class ImageWithItsText extends StatelessWidget {
   String imageUrl;
   Widget text;
+  VoidCallback onTap;
   AlignmentGeometry alignmentGeometry;
   double opacity;
   bool haveRadius;
   ImageWithItsText(
       {this.text,
+      this.onTap,
       this.opacity = 0.3,
       this.alignmentGeometry = Alignment.center,
       this.imageUrl,
@@ -354,26 +356,22 @@ class ImageWithItsText extends StatelessWidget {
     Screen screen = Provider.of(context);
     ThemeData theme = Theme.of(context);
     TextTheme textTheme = theme.textTheme;
-    return Material(
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/info');
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(haveRadius ? 12 : 0)),
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-              ),
-              Container(
-                color: Colors.black.withOpacity(this.opacity),
-              ),
-              Align(alignment: alignmentGeometry, child: text),
-            ],
-          ),
+    return InkWell(
+      onTap: this.onTap,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(haveRadius ? 12 : 0)),
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              color: Colors.black.withOpacity(this.opacity),
+            ),
+            Align(alignment: alignmentGeometry, child: text),
+          ],
         ),
       ),
     );

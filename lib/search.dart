@@ -5,6 +5,7 @@ import 'package:m/logic.dart';
 import 'package:m/screen.dart';
 import 'package:provider/provider.dart';
 
+import 'info.dart';
 import 'main.dart';
 
 class Search extends StatelessWidget {
@@ -19,13 +20,6 @@ class Search extends StatelessWidget {
             child: Scaffold(
             body: SearchBody(),
             appBar: AppBar(
-              leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Theme.of(context).accentColor,
-                    size: screen.aspectRatioConverter(40),
-                  ),
-                  onPressed: () {}),
               title: Text(
                 'Flights',
                 style: TextStyle(
@@ -53,6 +47,9 @@ class SearchBody extends StatelessWidget {
       child: Column(
         children: <Widget>[
           MyTextField('Search',
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: screen.heightConverter(10),
+                  horizontal: screen.widthConverter(10)),
               trailling: Material(
                 shape: CircleBorder(),
                 child: InkWell(
@@ -69,12 +66,14 @@ class SearchBody extends StatelessWidget {
               behavior: ScrollBehavior(),
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                itemCount: 20,
+                itemCount: 2,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: <Widget>[
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, Info.route);
+                        },
                         title: Text(
                           'Rome Ciampino',
                         ),

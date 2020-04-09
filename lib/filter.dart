@@ -15,65 +15,76 @@ class Filters extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     TextTheme textTheme = theme.textTheme;
     print(screen.width);
-    return UserRegistirationRoot(
-      'Filters',
-      Column(
-        children: <Widget>[
-          B('City', HirozSelectList()),
-          B('Features', HirozSelectList()),
-          B(
-            'Distance',
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      r'0k$',
-                      style: textTheme.subtitle,
-                    ),
-                    Text(
-                      r'10000$',
-                      style: textTheme.subtitle,
-                    )
-                  ],
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top: screen.heightConverter(0))),
-                RangeSlider(
-                    activeColor: Theme.of(context).accentColor,
-                    max: 999,
-                    min: 0,
-                    values: RangeValues(0, 200),
-                    onChanged: (x) {}),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Distance range: ',
-                      style: textTheme.subtitle
-                          .copyWith(color: theme.primaryColorDark),
-                    ),
-                    Text(r' 1,000 $ - 7,500$',
-                        style: textTheme.subtitle.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: theme.primaryColorDark))
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-      'Filter',
-      () {},
-      havePadding: false,
 
-      // appBar: PreferredSize(
-      //   child: MyAppBar(),
-      //   preferredSize: Size.fromHeight(screen.heightConverter(40)),
-      // ),
-      // havePadding: false,
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: screen.widthConverter(18)),
+              child: Text(
+                'Filters',
+                style: textTheme.display2,
+              ),
+            ),
+            B('City', HirozSelectList()),
+            B('Features', HirozSelectList()),
+            B(
+              'Distance',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screen.widthConverter(27)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          r'0k$',
+                          style: textTheme.subtitle,
+                        ),
+                        Text(
+                          r'10000$',
+                          style: textTheme.subtitle,
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: screen.heightConverter(0))),
+                  SizedBox.fromSize(
+                    child: RangeSlider(
+                        activeColor: Theme.of(context).accentColor,
+                        max: 999,
+                        min: 0,
+                        values: RangeValues(0, 200),
+                        onChanged: (x) {}),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screen.widthConverter(27)),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Distance range: ',
+                          style: textTheme.subtitle
+                              .copyWith(color: theme.primaryColorDark),
+                        ),
+                        Text(r' 1,000 $ - 7,500$',
+                            style: textTheme.subtitle.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: theme.primaryColorDark))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        appBar: AppBar(),
+      ),
     );
   }
 }
@@ -94,12 +105,18 @@ class B extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-              left: screen.widthConverter(0),
+              left: screen.widthConverter(18),
               top: screen.heightConverter(21),
               bottom: screen.heightConverter(12)),
           child: Text(this.text, style: textTheme.body2),
         ),
-        body
+        body,
+        // Padding(
+        //   padding: EdgeInsets.symmetric(vertical: screen.heightConverter(20)),
+        //   child: Divider(
+        //     height: 0,
+        //   ),
+        //  )
       ],
     );
   }
@@ -114,6 +131,7 @@ class HirozSelectList extends StatelessWidget {
 
     return SizedBox.fromSize(
       child: ListView.builder(
+        padding: EdgeInsets.only(left: screen.widthConverter(18)),
         itemCount: 20,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) => Padding(

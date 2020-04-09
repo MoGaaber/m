@@ -21,6 +21,7 @@ class BnvModel {
 }
 
 class Bnv extends StatefulWidget {
+  static const route = '/bnv';
   @override
   _BnvState createState() => _BnvState();
 }
@@ -49,10 +50,11 @@ class _BnvState extends State<Bnv> {
   int oldIndex = 0;
   int currentIndex = 0;
   var myIcons = [
-    BnvModel(FontAwesomeIcons.home, Trips(), MyAppBar(), selected: true),
+    BnvModel(FontAwesomeIcons.suitcaseRolling, Trips(), MyAppBar(),
+        selected: true),
     BnvModel(FontAwesomeIcons.search, Search(), SearchAppBar()),
     BnvModel(FontAwesomeIcons.table, BookFlight(), AppBar()),
-    BnvModel(FontAwesomeIcons.userAlt, Profile(), AppBar())
+    BnvModel(FontAwesomeIcons.user, Profile(), AppBar())
   ];
 
   @override

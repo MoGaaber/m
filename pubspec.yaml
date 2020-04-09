@@ -34,6 +34,15 @@ dependencies:
   flutter_range_slider: ^1.4.0
   flutter_screenutil: ^1.1.0
   auto_size_text: ^2.1.0
+  rive: ^0.0.1
+  splashscreen: ^1.2.0
+  after_layout: ^1.0.7+2
+  flutter_svg: ^0.17.4
+
+
+
+
+
   flutter_localizations:
     sdk: flutter
 

@@ -1,45 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m/info.dart';
+
 import 'package:m/logic.dart';
+
 import 'package:m/profile.dart';
+
 import 'package:m/screen.dart';
+
 import 'package:m/search.dart';
+
 import 'package:m/sign_up.dart';
+
 import 'package:m/splash.dart';
+
 import 'package:m/trips.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 import 'bnv.dart';
+
 import 'book_flight.dart';
+
 import 'check_out.dart';
+
 import 'filter.dart';
+
 import 'find_flight.dart';
+
 import 'forget.dart';
+
 import 'info_logic.dart';
+
 import 'language.dart';
+
 import 'more.dart';
 
-var sfUiRegular = TextStyle(
-    fontFamily: 'SFUIText', color: Colors.white, fontWeight: FontWeight.w500);
-var sfUiSemi = TextStyle(
-    fontFamily: 'SFUIText', color: Colors.white, fontWeight: FontWeight.w700);
-var robotoBold = TextStyle(
-    fontFamily: 'RobotoSlab', color: Colors.white, fontWeight: FontWeight.w900);
-var robotoRegular = TextStyle(
-    fontFamily: 'RobotoSlab', color: Colors.white, fontWeight: FontWeight.w500);
-var openSansRegular = TextStyle(
-    fontFamily: 'OpenSans', color: Colors.white, fontWeight: FontWeight.w500);
-void main() => runApp(Provider(
-      child: ContextMateriaApp(),
-      create: (_) => Screen(),
-    ));
+BuildContext globalContext;
+
+void main() {
+  runApp(Provider(
+    child: ContextMateriaApp(),
+    create: (_) => Screen(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   Screen screen;
   @override
   Widget build(BuildContext context) {
+    globalContext = context;
     Screen screen = Provider.of<Screen>(context);
     screen.size = MediaQuery.of(context).size;
     screen.mediaQueryData = MediaQuery.of(context);
@@ -65,9 +78,11 @@ class MyApp extends StatelessWidget {
         behavior: ScrollBehavior(),
         child: MaterialApp(
           routes: {
+            Splash.route: (_) => Splash(),
             Search.route: (_) => Search(),
             More.route: (_) => More(),
             Info.route: (_) => Info(),
+            Bnv.route: (_) => Bnv(),
             SignUp.route: (_) => SignUp(),
             Login.route: (_) => Login(),
             CheckOut.route: (_) => CheckOut(),
@@ -81,6 +96,7 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
+          initialRoute: Bnv.route,
           theme: ThemeData(
             textTheme: TextTheme(
                 overline: myCommontTextStyle.copyWith(
@@ -130,7 +146,6 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.light(primary: Colors.green),
             ),
           ),
-          home: Bnv(),
         ),
       ),
     );

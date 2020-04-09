@@ -24,6 +24,7 @@ class MyAppBar extends StatelessWidget {
               icon: Icon(
                 FontAwesomeIcons.slidersH,
                 color: Color(0xff323B45),
+                size: screen.heightConverter(20),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, Filters.route);
@@ -62,6 +63,7 @@ class Trips extends StatelessWidget {
                   icon: Icon(
                     FontAwesomeIcons.slidersH,
                     color: Color(0xff323B45),
+                    size: screen.heightConverter(20),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, Filters.route);
@@ -113,10 +115,17 @@ class Trips extends StatelessWidget {
                     height: screen.heightConverter(70),
                     left: screen.widthConverter(30),
                     child: SizedBox.fromSize(
-                        child: SearchTextField(
-                          onTap: () => Navigator.pushNamed(context, '/search'),
-                        ),
-                        size: Size.fromWidth(screen.widthConverter(300))),
+                      size: Size.fromWidth(screen.widthConverter(300)),
+                      child: SearchTextField(
+                        readOnly: true,
+                        onTap: () {
+                          Navigator.pushNamed(context, '/search',
+                              arguments: true);
+
+                          print('hello');
+                        },
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -140,6 +149,9 @@ class Trips extends StatelessWidget {
             children: <Widget>[
               for (int i = 0; i < 4; i++)
                 ImageWithItsText(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/info');
+                  },
                   imageUrl: imageUrl,
                   alignmentGeometry: Alignment(0, 0.90),
                   text: Text(
@@ -161,6 +173,9 @@ class Trips extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) => SizedBox(
                 child: ImageWithItsText(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/info');
+                  },
                   imageUrl: imageUrl,
                   alignmentGeometry: Alignment(0, 0.90),
                   text: Column(
@@ -215,48 +230,53 @@ class GridCard extends StatelessWidget {
     Screen screen = Provider.of(context);
     final theme = Theme.of(context);
     var textTheme = theme.textTheme;
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: ClipRRect(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(screen.widthConverter(10))),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                // width: screen.widthConverter(158),
-                // height: screen.heightConverter(100),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/info');
+      },
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(screen.widthConverter(10))),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  // width: screen.widthConverter(158),
+                  // height: screen.heightConverter(100),
+                ),
               ),
             ),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'Edinburgh Zoo',
-                style: textTheme.body1,
-              ),
-              Text(
-                r"26$",
-                style: textTheme.body2,
-              )
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
-          Text('4 of your friends like this spot friends like this spot',
-              style: textTheme.body1.copyWith(
-                  fontFamily: 'RobotoSlab',
-                  color: Color(0xff5C6979),
-                  fontSize: ScreenUtil().setSp(10))),
-          Padding(padding: EdgeInsets.only(top: 4)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              MyRatingBar(screen.heightConverter(14)),
-              Text('6 deals left', style: textTheme.overline)
-            ],
-          ),
-        ]);
+            Row(
+              children: <Widget>[
+                Text(
+                  'Edinburgh Zoo',
+                  style: textTheme.body1,
+                ),
+                Text(
+                  r"26$",
+                  style: textTheme.body2,
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Text('4 of your friends like this spot friends like this spot',
+                style: textTheme.body1.copyWith(
+                    fontFamily: 'RobotoSlab',
+                    color: Color(0xff5C6979),
+                    fontSize: ScreenUtil().setSp(10))),
+            Padding(padding: EdgeInsets.only(top: 4)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                MyRatingBar(screen.heightConverter(14)),
+                Text('6 deals left', style: textTheme.overline)
+              ],
+            ),
+          ]),
+    );
   }
 }
 
