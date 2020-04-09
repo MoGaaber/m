@@ -106,8 +106,33 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
+    Screen screen = Provider.of(context);
+    ThemeData themeData = Theme.of(context);
+    TextTheme textTheme = themeData.textTheme;
 
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(),
+      body: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: ListView(
+          padding:
+              EdgeInsets.symmetric(horizontal: screen.widthConverter(20.5)),
+          children: <Widget>[
+            MyTextField('Email Address'),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: screen.heightConverter(33.5)),
+              child: FlatButton(
+                onPressed: () {},
+                child: Text('Reset your password'),
+                color: themeData.accentColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
     return UserRegistirationRoot(
       'Reset password',
       Column(

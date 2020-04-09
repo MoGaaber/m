@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m/bnv.dart';
 import 'package:m/forget.dart';
 import 'package:m/info.dart';
 import 'package:m/screen.dart';
@@ -18,70 +19,74 @@ class Filters extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: screen.widthConverter(18)),
-              child: Text(
-                'Filters',
-                style: textTheme.display2,
+        body: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: ListView(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: screen.widthConverter(18)),
+                child: Text(
+                  'Filters',
+                  style: textTheme.display2,
+                ),
               ),
-            ),
-            B('City', HirozSelectList()),
-            B('Features', HirozSelectList()),
-            B(
-              'Distance',
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: screen.widthConverter(27)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          r'0k$',
-                          style: textTheme.subtitle,
-                        ),
-                        Text(
-                          r'10000$',
-                          style: textTheme.subtitle,
-                        )
-                      ],
+              B('City', HirozSelectList()),
+              B('Features', HirozSelectList()),
+              B(
+                'Distance',
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screen.widthConverter(27)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            r'0k$',
+                            style: textTheme.subtitle,
+                          ),
+                          Text(
+                            r'10000$',
+                            style: textTheme.subtitle,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(top: screen.heightConverter(0))),
-                  SizedBox.fromSize(
-                    child: RangeSlider(
-                        activeColor: Theme.of(context).accentColor,
-                        max: 999,
-                        min: 0,
-                        values: RangeValues(0, 200),
-                        onChanged: (x) {}),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: screen.widthConverter(27)),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          'Distance range: ',
-                          style: textTheme.subtitle
-                              .copyWith(color: theme.primaryColorDark),
-                        ),
-                        Text(r' 1,000 $ - 7,500$',
-                            style: textTheme.subtitle.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: theme.primaryColorDark))
-                      ],
+                    Padding(
+                        padding:
+                            EdgeInsets.only(top: screen.heightConverter(0))),
+                    SizedBox.fromSize(
+                      child: RangeSlider(
+                          activeColor: Theme.of(context).accentColor,
+                          max: 999,
+                          min: 0,
+                          values: RangeValues(0, 200),
+                          onChanged: (x) {}),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screen.widthConverter(27)),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Distance range: ',
+                            style: textTheme.subtitle
+                                .copyWith(color: theme.primaryColorDark),
+                          ),
+                          Text(r' 1,000 $ - 7,500$',
+                              style: textTheme.subtitle.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: theme.primaryColorDark))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
         appBar: AppBar(),
       ),

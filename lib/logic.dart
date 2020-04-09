@@ -12,28 +12,47 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
+    Screen screen = Provider.of(context);
+    ThemeData themeData = Theme.of(context);
+    TextTheme textTheme = themeData.textTheme;
 
-    return UserRegistirationRoot(
-      'Sign in',
-      Column(
-        children: <Widget>[
-          MyTextField('Email Address'),
-          MyTextField('Password'),
-        ],
-      ),
-      'Sign in',
-      () {},
-      extra: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, ForgetPassword.route);
-        },
-        child: Text(
-          'Forget password',
-          style: textTheme.body1.copyWith(color: theme.primaryColorDark),
-        ),
-      ),
-    );
+    return SafeArea(
+        child: Scaffold(
+            appBar: AppBar(),
+            body: ListView(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screen.widthConverter(20.5)),
+                children: <Widget>[
+                  Text(
+                    'Sign in',
+                    style: textTheme.display2,
+                  ),
+                  Padding(
+                      padding:
+                          EdgeInsets.only(bottom: screen.heightConverter(23))),
+                  MyTextField('Email Address'),
+                  MyTextField('Password'),
+                  Padding(
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text('Sign up'),
+                        color: themeData.accentColor,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: screen.heightConverter(33.5))),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, ForgetPassword.route);
+                      },
+                      child: Text(
+                        'Forget password',
+                        style: textTheme.body1
+                            .copyWith(color: theme.primaryColorDark),
+                      ),
+                    ),
+                  ),
+                ])));
   }
 }
 

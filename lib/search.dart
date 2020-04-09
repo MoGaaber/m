@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m/bnv.dart';
 import 'package:m/logic.dart';
 import 'package:m/screen.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class SearchBody extends StatelessWidget {
           Padding(padding: EdgeInsets.only(top: screen.heightConverter(16))),
           Expanded(
             child: ScrollConfiguration(
-              behavior: ScrollBehavior(),
+              behavior: MyBehavior(),
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 itemCount: 2,

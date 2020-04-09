@@ -23,17 +23,19 @@ class BookFlight extends StatelessWidget {
     var smallButtontextStyle = textTheme.button.copyWith(
       fontSize: ScreenUtil().setSp(15),
     );
+    bool haveAppBar = ModalRoute.of(context).settings.arguments ?? false;
 
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(),
+      appBar: haveAppBar ? AppBar() : null,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: ListView(
           children: <Widget>[
             Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: screen.heightConverter(20)),
+              padding: EdgeInsets.only(
+                  top: screen.heightConverter(haveAppBar ? 5 : 40),
+                  bottom: screen.heightConverter(20)),
               child: Text(
                 'Book This Tour',
                 style: textTheme.display2,

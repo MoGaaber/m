@@ -212,7 +212,8 @@ class Info extends StatelessWidget {
                     horizontal: screen.widthConverter(18.5)),
                 child: MyFlatButton(
                   onTap: () {
-                    Navigator.pushNamed(context, BookFlight.route);
+                    Navigator.pushNamed(context, BookFlight.route,
+                        arguments: true);
                   },
                   text: 'Booking',
                 ),

@@ -24,15 +24,6 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              // Container(
-
-              //   width: screen.widthConverter(90),
-              //   height: screen.heightConverter(90),
-              //   decoration: BoxDecoration(
-              //       image: DecorationImage(
-              //           fit: BoxFit.cover,
-              //            )),
-              // ),
               ClipRRect(
                 borderRadius: BorderRadius.all(
                     Radius.circular(screen.aspectRatioConverter(10))),

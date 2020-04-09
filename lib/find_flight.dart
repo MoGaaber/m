@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m/bnv.dart';
 import 'package:provider/provider.dart';
 
 import 'screen.dart';
@@ -10,28 +11,31 @@ class FindFlights extends StatelessWidget {
     print(screen.width.toString() + '!!');
     return SafeArea(
         child: Scaffold(
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Icon(Icons.person_pin_circle),
-              Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[Text('Adults'), Text('16+ years')],
-              ),
-              Spacer(
-                flex: 12,
-              ),
-              MyButton(),
-              Spacer(),
-              Text('1'),
-              Spacer(),
-              MyButton()
-            ],
-          )
-        ],
+      body: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(Icons.person_pin_circle),
+                Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[Text('Adults'), Text('16+ years')],
+                ),
+                Spacer(
+                  flex: 12,
+                ),
+                MyButton(),
+                Spacer(),
+                Text('1'),
+                Spacer(),
+                MyButton()
+              ],
+            )
+          ],
+        ),
       ),
     ));
   }

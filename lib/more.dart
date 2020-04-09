@@ -19,51 +19,53 @@ class More extends StatelessWidget {
           children: <Widget>[
             MyAppBar(),
             Expanded(
-              child: NestedScrollView(
-                  physics: BouncingScrollPhysics(),
-                  headerSliverBuilder: (BuildContext context,
-                          bool innerBoxIsScrolled) =>
-                      [
-                        SliverAppBar(
-                          elevation: 0,
-                          backgroundColor: Colors.transparent,
-                          floating: true,
-                          snap: true,
-                          flexibleSpace: FlexibleSpaceBar(
-                            background: Center(
-                              child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: screen.widthConverter(25),
-                                      right: screen.widthConverter(25),
-                                      top: screen.heightConverter(10),
-                                      bottom: screen.heightConverter(0)),
-                                  child: SearchTextField(
-                                    edgeInsetsGeometry: EdgeInsets.symmetric(
-                                        vertical: screen.heightConverter(10)),
-                                    readOnly: false,
-                                  )),
+              child: ScrollConfiguration(
+                behavior: MyBehavior(),
+                child: NestedScrollView(
+                    headerSliverBuilder: (BuildContext context,
+                            bool innerBoxIsScrolled) =>
+                        [
+                          SliverAppBar(
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            floating: true,
+                            snap: true,
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: Center(
+                                child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: screen.widthConverter(25),
+                                        right: screen.widthConverter(25),
+                                        top: screen.heightConverter(10),
+                                        bottom: screen.heightConverter(0)),
+                                    child: SearchTextField(
+                                      edgeInsetsGeometry: EdgeInsets.symmetric(
+                                          vertical: screen.heightConverter(10)),
+                                      readOnly: false,
+                                    )),
+                              ),
                             ),
-                          ),
-                          expandedHeight: screen.heightConverter(120),
-                          leading: SizedBox.shrink(),
-                        )
-                      ],
-                  body: ScrollConfiguration(
-                      behavior: MyBehavior(),
-                      child: GridView.count(
-                        children: <Widget>[
-                          for (var i = 0; i < 7; i++) GridCard()
+                            expandedHeight: screen.heightConverter(120),
+                            leading: SizedBox.shrink(),
+                          )
                         ],
-                        physics: BouncingScrollPhysics(),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screen.widthConverter(19),
-                            vertical: screen.heightConverter(5)),
-                        childAspectRatio: (screen.widthConverter(156) /
-                            screen.heightConverter(194)),
-                        crossAxisSpacing: screen.widthConverter(16),
-                        mainAxisSpacing: screen.heightConverter(13),
-                        crossAxisCount: 2,
-                      ))),
+                    body: ScrollConfiguration(
+                        behavior: MyBehavior(),
+                        child: GridView.count(
+                          children: <Widget>[
+                            for (var i = 0; i < 7; i++) GridCard()
+                          ],
+                          physics: BouncingScrollPhysics(),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screen.widthConverter(19),
+                              vertical: screen.heightConverter(5)),
+                          childAspectRatio: (screen.widthConverter(156) /
+                              screen.heightConverter(194)),
+                          crossAxisSpacing: screen.widthConverter(16),
+                          mainAxisSpacing: screen.heightConverter(13),
+                          crossAxisCount: 2,
+                        ))),
+              ),
             ),
           ],
         ),
