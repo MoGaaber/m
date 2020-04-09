@@ -53,7 +53,7 @@ class _BnvState extends State<Bnv> {
     BnvModel(FontAwesomeIcons.suitcaseRolling, Trips(), MyAppBar(),
         selected: true),
     BnvModel(FontAwesomeIcons.search, Search(), SearchAppBar()),
-    BnvModel(FontAwesomeIcons.calendar, BookFlight(), AppBar()),
+    BnvModel(FontAwesomeIcons.calendarAlt, BookFlight(), AppBar()),
     BnvModel(FontAwesomeIcons.user, Profile(), AppBar())
   ];
 
