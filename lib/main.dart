@@ -96,7 +96,7 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          initialRoute: Bnv.route,
+          initialRoute: Splash.route,
           theme: ThemeData(
             textTheme: TextTheme(
                 overline: myCommontTextStyle.copyWith(

@@ -39,8 +39,8 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
           Center(
             child: Image.asset(
               'assets/logo.png',
-              fit: BoxFit.fitWidth,
-              width: screen.widthConverter(216),
+              fit: BoxFit.cover,
+              width: screen.widthConverter(214),
             ),
           ),
           Padding(padding: EdgeInsets.only(bottom: screen.heightConverter(20))),
