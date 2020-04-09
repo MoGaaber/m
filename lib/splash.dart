@@ -14,19 +14,6 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    print('did');
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     print('build');
     Screen screen = Provider.of(context);
@@ -38,7 +25,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
         children: <Widget>[
           Center(
             child: Image.asset(
-              'assets/logo.png',
+              'assets/images/logo.png',
               fit: BoxFit.cover,
               width: screen.widthConverter(214),
             ),
@@ -48,7 +35,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
             height: screen.heightConverter(10),
             width: screen.widthConverter(50),
             child: Rive(
-              filename: 'assets/loadd.flr',
+              filename: 'assets/flare/load.flr',
               animation: 'Untitled',
             ),
           ),
@@ -64,9 +51,3 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
     });
   }
 }
-// Image.asset(
-//           'assets/logo.png',
-//           fit: BoxFit.fitHeight,
-//           height: 80,
-//           width: 300,
-//         ),

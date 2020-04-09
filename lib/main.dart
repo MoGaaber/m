@@ -131,10 +131,10 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               textTheme: TextTheme(
                   display2: TextStyle(
-                      fontSize: screenUtil.setSp(28),
-                      fontFamily: 'OpenSans',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500)),
+                fontSize: screenUtil.setSp(28),
+                fontFamily: 'OpenSans',
+                color: Colors.white,
+              )),
               iconTheme: IconThemeData(color: Color(0xff005C15), size: 50),
               elevation: 0,
             ),

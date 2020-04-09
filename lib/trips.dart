@@ -74,7 +74,7 @@ class Trips extends StatelessWidget {
             ],
             centerTitle: true,
             title: Image.asset(
-              'assets/logo.png',
+              'assets/images/logo.png',
               fit: BoxFit.fitHeight,
 //            width: 40,
               height: screen.heightConverter(21),
@@ -152,7 +152,7 @@ class Trips extends StatelessWidget {
                 for (int i = 0; i < 4; i++)
                   ImageWithItsText(
                     onTap: () {
-                      Navigator.pushNamed(context, '/info');
+                      Navigator.pushNamed(context, '/more');
                     },
                     imageUrl: imageUrl,
                     alignmentGeometry: Alignment(0, 0.90),
