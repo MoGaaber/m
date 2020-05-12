@@ -1,0 +1,808 @@
+{
+	"info": {
+		"_postman_id": "049c2d77-d2b1-4e3a-a68e-dc2c16adc3a4",
+		"name": "Touri",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MainPage",
+			"item": [
+				{
+					"name": "Slider",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/slider",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"slider"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/top_destinations",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"top_destinations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List 2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/popular",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List 3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/wonderful",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"wonderful"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List 4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/destinations",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"destinations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List 5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/destinations",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"destinations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Special Lists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/special_lists",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"special_lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "From Our Blog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/from_our_blog",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"from_our_blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partners",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/partners",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"partners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top Reviews",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://test.touri.sa/api/main/top_reviews",
+							"protocol": "http",
+							"host": [
+								"test",
+								"touri",
+								"sa"
+							],
+							"path": [
+								"api",
+								"main",
+								"top_reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fname",
+							"value": "user",
+							"description": "Required",
+							"type": "text"
+						},
+						{
+							"key": "lname",
+							"value": "pass",
+							"description": "Required",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "user-pass@gmail.com",
+							"description": "Required",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"description": "Required",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "password",
+							"description": "Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/register",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "user@gmail.com",
+							"description": "Required",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"description": "Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/login",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "jam.abuayman@gmail.com",
+							"description": "Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/password/email",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"password",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MzQ2ZWVmYzVmMDk2NzdhZWY2ZTQyNmM0OTQ3ZTEwZmJkMTkzN2ExOGUxOTBhOGY0ZTlkMTJhNTgxNzcyNjkxYjg0N2Q1Y2ZlMTI5NTkiLCJpYXQiOjE1ODU4ODg3NTksIm5iZiI6MTU4NTg4ODc1OSwiZXhwIjoxNjE3NDI0NzU5LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.yfRta4IYQSNPUPA-9Lj4Tj2171tAv9wIJhR1wAOrFwmVGW7YSNPUE0iHu6SSzLS763p4jEjA-yrt2pajTss7K5oQ7vahEuTT65RofE1ZUTHLiTjcr60woHPY8fPIdV6jF0PobwBA8fAIb7mgkZKDnU7aAmdZ327bfTIockWxFdRhURvjYCBdqmEVDgCKBqRf4TxBJtbxpGiEOdWPrvtQt6dRaNNOkXB8QhayrZc7wr7x8JQp0REjzJb5PE7RqGSa3lbpCqq87raw-0TMLV8gtZfS_wzKMVh69prTylkQ95H_66uiZ3sGBNBxAw7cGYfJmQiScZ1qsFwrZA6PFQAJxNOKNFCIvdDohAUXlJgZ1N-vBMD7VeLYOVuysQsMDLQiZdpf0xFP-BF3Rj--tYB7fQXya3y89efr6IdHAgDF9tNU2A0LiP_IuIJ-0MRgWLHnCBKZ_68dIIRkJd76FGs-1ES7uy4YKUoNPQ0uZRPbvmxbatImfa3GfCnIOhwsGD_pSaTkfk0hiUIKE-A6BZ0gZ81mYkDnMowygILsNFaiYmt7zV5AbqN8EFXt0hyDKNoyTMB4avfwjJHnCxFR2gor_c33GUQdK50pnuKvUsxrZbs7FZ4bfWXeq_VzJxnEKieY043WJV8Ja7uKmio-ImOwWQJRPniMSlmLosaDyXsGOGk"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/logout",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MzQ2ZWVmYzVmMDk2NzdhZWY2ZTQyNmM0OTQ3ZTEwZmJkMTkzN2ExOGUxOTBhOGY0ZTlkMTJhNTgxNzcyNjkxYjg0N2Q1Y2ZlMTI5NTkiLCJpYXQiOjE1ODU4ODg3NTksIm5iZiI6MTU4NTg4ODc1OSwiZXhwIjoxNjE3NDI0NzU5LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.yfRta4IYQSNPUPA-9Lj4Tj2171tAv9wIJhR1wAOrFwmVGW7YSNPUE0iHu6SSzLS763p4jEjA-yrt2pajTss7K5oQ7vahEuTT65RofE1ZUTHLiTjcr60woHPY8fPIdV6jF0PobwBA8fAIb7mgkZKDnU7aAmdZ327bfTIockWxFdRhURvjYCBdqmEVDgCKBqRf4TxBJtbxpGiEOdWPrvtQt6dRaNNOkXB8QhayrZc7wr7x8JQp0REjzJb5PE7RqGSa3lbpCqq87raw-0TMLV8gtZfS_wzKMVh69prTylkQ95H_66uiZ3sGBNBxAw7cGYfJmQiScZ1qsFwrZA6PFQAJxNOKNFCIvdDohAUXlJgZ1N-vBMD7VeLYOVuysQsMDLQiZdpf0xFP-BF3Rj--tYB7fQXya3y89efr6IdHAgDF9tNU2A0LiP_IuIJ-0MRgWLHnCBKZ_68dIIRkJd76FGs-1ES7uy4YKUoNPQ0uZRPbvmxbatImfa3GfCnIOhwsGD_pSaTkfk0hiUIKE-A6BZ0gZ81mYkDnMowygILsNFaiYmt7zV5AbqN8EFXt0hyDKNoyTMB4avfwjJHnCxFR2gor_c33GUQdK50pnuKvUsxrZbs7FZ4bfWXeq_VzJxnEKieY043WJV8Ja7uKmio-ImOwWQJRPniMSlmLosaDyXsGOGk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/profile",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Languages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/languages",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"languages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currencies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/currencies",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Countries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/countries",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/cities",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/features",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tour",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/tour/109",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"tour",
+						"109"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tours",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "رحلة",
+							"description": "Not Required",
+							"type": "text"
+						},
+						{
+							"key": "country[]",
+							"value": "7",
+							"description": "Not Required, Country id",
+							"type": "text"
+						},
+						{
+							"key": "city[]",
+							"value": "61,62,63,64,65,9,21,22",
+							"description": "Not Required, City id",
+							"type": "text"
+						},
+						{
+							"key": "feature[]",
+							"value": "tours",
+							"description": "Not Required,[tours,offers,events,packages]",
+							"type": "text"
+						},
+						{
+							"key": "feature[]",
+							"value": "offers",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "200;1000",
+							"description": "Not Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/tours",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"tours"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Tour",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "رحلة",
+							"description": "Not Required",
+							"type": "text"
+						},
+						{
+							"key": "country[]",
+							"value": "7",
+							"description": "Not Required, Country id",
+							"type": "text"
+						},
+						{
+							"key": "city[]",
+							"value": "61,62,63,64,65,9,21,22",
+							"description": "Not Required, City id",
+							"type": "text"
+						},
+						{
+							"key": "feature[]",
+							"value": "tours",
+							"description": "Not Required,[tours,offers,events,packages]",
+							"type": "text"
+						},
+						{
+							"key": "feature[]",
+							"value": "offers",
+							"type": "text"
+						},
+						{
+							"key": "feature[]",
+							"value": "events",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "200;1000",
+							"description": "Not Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://test.touri.sa/api/tours",
+					"protocol": "http",
+					"host": [
+						"test",
+						"touri",
+						"sa"
+					],
+					"path": [
+						"api",
+						"tours"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
