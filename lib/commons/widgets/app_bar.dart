@@ -21,7 +21,7 @@ class MyAppBar extends StatelessWidget {
                 size: screen.heightConverter(15),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, FiltersRoot.route);
+                Navigator.pushNamed(context, Filter.route);
               }),
         )
       ],
