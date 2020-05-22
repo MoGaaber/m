@@ -10,14 +10,13 @@ import '../../validators.dart';
 class EmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var authConstants = AuthConstants(context);
-    var contentPaddingField = authConstants.contentPaddingField;
+    var localization = Localization.of(context).auth;
+
     var logic = Provider.of<AuthLogic>(context, listen: false);
     return MyTextField(
-      'Email Address',
-      // contentPadding: contentPaddingField,
+      localization[6],
       controller: logic.emailController,
-      validator: TextFieldValidators(logic).email,
+      validator: TextFieldValidators(context).email,
     );
   }
 }

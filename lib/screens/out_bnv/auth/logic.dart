@@ -5,40 +5,43 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:m/commons/models/dio_response.dart';
+import 'package:m/commons/utils/localization/localization.dart';
+import 'package:m/commons/utils/methods.dart';
 import 'package:m/constants/apis_url.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/model.dart';
 import 'package:m/screens/out_bnv/auth/ui/login.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
-typedef Map<String, dynamic> MessageHandler(Map<String, dynamic> result);
+typedef String MessageHandler(BuildContext context);
 typedef void PasswordType();
-typedef Future SuccessAction(x);
+typedef void SuccessAction(x);
 
 class AuthLogic with ChangeNotifier {
-  BuildContext context;
   static final loginFormKey = GlobalKey<FormState>();
   static final registerFormKey = GlobalKey<FormState>();
   static final forgetPasswordFormKey = GlobalKey<FormState>();
   static final scaffoldKey = GlobalKey<ScaffoldState>();
+  static final loginKey = GlobalKey<ScaffoldState>();
+
   final fNameController = TextEditingController();
   final lNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmationController = TextEditingController();
   final test = TextEditingController();
-
   var obscurePassword = true;
   var obscurePasswordConfirmation = true;
   static Map<String, dynamic> signUpForm;
   static Map<String, dynamic> signInForm;
   String avatarPath;
   static String email;
-  static ProgressDialog progressDialog;
-
-  AuthLogic(this.context);
-  static void setProgressDialog(BuildContext context) =>
-      progressDialog = ProgressDialog(context);
+  BuildContext context;
+  static List<String> localization;
+  AuthLogic(this.context) {
+    localization = Localization.of(context).auth;
+  }
 
   void toogleObscure() {
     obscurePassword = !obscurePassword;
@@ -53,50 +56,61 @@ class AuthLogic with ChangeNotifier {
     notifyListeners();
   }
 
-  static Future postForm(Map<String, dynamic> form, String apiUrl) async {
+  static Future<AuthDioResponse> postForm(
+      BuildContext context, Map<String, dynamic> form, String apiUrl) async {
+    // Methods(context).showProgressDialog();
+    // Methods(context).hideProgressDialog();
+
     FormData formData = new FormData.fromMap(form);
     try {
       var response = await Dio().post(
         apiUrl,
         data: formData,
       );
-      return response.data;
+      return AuthDioResponse(200, response: response.data);
     } catch (e) {
       DioError dioError = e;
-      return dioError.response.data;
+      return AuthDioResponse(dioError.response?.statusCode);
     }
   }
 
-  waitForName(GlobalKey<FormState> formKey, Map<String, dynamic> form,
-      String api, MessageHandler messageHandler, SuccessAction action) async {
+  void waitForName(
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    Map<String, dynamic> form,
+    String api,
+    MessageHandler messageHandler,
+    SuccessAction action,
+  ) async {
     final isValid = formKey.currentState.validate();
     if (isValid) {
-      // await progressDialog.show();
-      var result = await postForm(form, api);
-      // await progressDialog.hide();
-
-      if (result.containsKey('success')) {
-        // showSnackBar('successful', Colors.green);
-        action(result);
+      var response = await postForm(context, form, api);
+      var responseStatusCode = response.statusCode;
+      if (responseStatusCode == 200) {
+        action(response.response['success']);
+      } else if (responseStatusCode == null) {
+        showSnackBar(localization[15]);
+      } else if (responseStatusCode == 401) {
+        showSnackBar(messageHandler(context));
       } else {
-        var message = messageHandler(result);
-        showSnackBar(message['message'], message['color']);
+        showSnackBar(localization[14]);
       }
     }
   }
 
-  Future<void> register() async {
-    waitForName(registerFormKey, await registerForm(), ApisUrls.signUp,
+  Future<void> register(BuildContext context) async {
+    waitForName(context, registerFormKey, await registerForm(), ApisUrls.signUp,
         registerMessageHandler, (x) {
-      toLoginPage();
+      toLoginPage(context);
     });
   }
 
-  void toLoginPage() {
-    Navigator.pushReplacementNamed(this.context, Login.route);
+  void toLoginPage(BuildContext context) {
+    Navigator.pushReplacementNamed(context, Login.route);
   }
 
-  void login() => waitForName(
+  void login(BuildContext context) => waitForName(
+          context,
           loginFormKey,
           {
             'email': emailController.text,
@@ -104,19 +118,19 @@ class AuthLogic with ChangeNotifier {
           },
           ApisUrls.signIn,
           loginMessageHandler, (x) async {
-        var info = User.fromJsonAfterLogin(x['success'], emailController.text);
+        var info = User.fromJsonAfterLogin(x, emailController.text);
         await sharedPreferences.setString('token', info.token);
         await sharedPreferences.setBool('isLoggedIn', true);
-
-        Navigator.pop(this.context, info);
+        Navigator.pop(context, info);
       });
 
-  void forgetPassword() => waitForName(
+  void forgetPassword(BuildContext context) => waitForName(
+          context,
           forgetPasswordFormKey,
           {'email': emailController.text},
           ApisUrls.resetPassword,
           forgetPasswordMessageHandler, (x) {
-        toLoginPage();
+        toLoginPage(context);
       });
 
   Future<Map<String, dynamic>> registerForm() async {
@@ -138,34 +152,16 @@ class AuthLogic with ChangeNotifier {
     return form;
   }
 
-  static Map<String, dynamic> loginMessageHandler(
-      Map<String, dynamic> message) {
-    return {'message': 'Recheck your Email and password', 'color': Colors.red};
+  static String loginMessageHandler(BuildContext context) {
+    return localization[16];
   }
 
-  static Map<String, dynamic> forgetPasswordMessageHandler(
-      Map<String, dynamic> message) {
-    return {'message': 'Recheck your Email ', 'color': Colors.red};
+  static String forgetPasswordMessageHandler(BuildContext context) {
+    return localization[17];
   }
 
-  static Map<String, dynamic> registerMessageHandler(
-      Map<String, dynamic> message) {
-    if (message.containsKey('success')) {
-      return {'message': 'Successful registration', 'color': Colors.green};
-    } else {
-      Map<String, dynamic> errorMessage = message['error'];
-
-      if (errorMessage.containsKey('email')) {
-        return {
-          'message': 'Email address is Already Taken',
-          'color': Colors.red
-        };
-      }
-      return {
-        'message': 'Something went wrong . Try again',
-        'color': Colors.red
-      };
-    }
+  static String registerMessageHandler(BuildContext context) {
+    return localization[18];
   }
 
   Future<void> pickAvatar() async {
@@ -178,26 +174,12 @@ class AuthLogic with ChangeNotifier {
     notifyListeners();
   }
 
-  void showSnackBar(String message, Color color) {
+  static void showSnackBar(
+    String message,
+  ) {
     scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text(message),
-      backgroundColor: color,
+      // backgroundColor: color,
     ));
   }
 }
-/*
-  static void showSuccessSnackBar(String message) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.green,
-    ));
-  }
-
-  static void showFailSnackBar(String message) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.red,
-    ));
-  }
-
-*/

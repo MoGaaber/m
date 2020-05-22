@@ -30,9 +30,6 @@ class NormalGridView extends StatelessWidget {
                       ? logic.gridViewModel.castedResponse.length
                       : logic.searchList.length,
                   physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: screen.widthConverter(19),
-                      vertical: screen.heightConverter(5)),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: (screen.widthConverter(156) /

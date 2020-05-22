@@ -11,9 +11,11 @@ class PasswordTextField extends StatelessWidget {
   final FormFieldValidator<String> validator;
   final VoidCallback onTabTrailling;
   final bool obscureText;
+  String hintText;
   PasswordTextField(
       {@required this.textEditingController,
       @required this.obscureText,
+      @required this.hintText,
       @required this.onTabTrailling,
       this.validator});
 
@@ -22,7 +24,7 @@ class PasswordTextField extends StatelessWidget {
     var localization = Localization.of(context).locale.languageCode;
     Screen screen = Provider.of(context);
     return MyTextField(
-      'Password',
+      hintText,
       // contentPadding: AuthConstants(context).contentPaddingField.add(
       //     EdgeInsets.only(
       //         right: localization == 'en' ? screen.widthConverter(40) : 0,
@@ -30,6 +32,7 @@ class PasswordTextField extends StatelessWidget {
       obscureText: this.obscureText,
       controller: this.textEditingController,
       helperText: null,
+
       onTapTrailling: () {
         onTabTrailling();
       },

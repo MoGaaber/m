@@ -19,6 +19,7 @@ class MyFutureBuilder<E> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<E>(
       builder: (BuildContext context, snapshot) {
+        print('helloo');
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             DioError e = snapshot.error;

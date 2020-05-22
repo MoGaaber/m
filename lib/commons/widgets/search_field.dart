@@ -34,7 +34,7 @@ class MySearchTextField extends StatelessWidget {
       color: Colors.white,
       shadow: [
         BoxShadow(
-            blurRadius: (20), spreadRadius: (0), color: Color(0xffC9D1DC)),
+            blurRadius: (10), spreadRadius: (0), color: Color(0xffC9D1DC)),
       ],
       prefixIcon: Icon(
         FontAwesomeIcons.search,

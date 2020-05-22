@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:m/commons/models/complete_element.dart';
 import 'package:m/screens/out_bnv/full_screen_map/full_screen_map.dart';
 import 'package:m/screens/out_bnv/language/logic.dart';
 import 'package:m/screens/out_bnv/photo_view/photo_view.dart';
@@ -13,9 +14,7 @@ import 'commons/utils/localization/delegate.dart';
 import 'commons/utils/screen.dart';
 import 'commons/widgets/map.dart';
 import 'commons/widgets/scroll_behavior.dart';
-import 'screens/bnv/pages/check_out/ui.dart';
 import 'screens/bnv/widget/bnv.dart';
-import 'screens/out_bnv/auth/logic.dart';
 import 'screens/out_bnv/auth/ui/forget.dart';
 import 'screens/out_bnv/auth/ui/login.dart';
 import 'screens/out_bnv/auth/ui/register.dart';
@@ -62,18 +61,6 @@ class ContextMateriaApp extends StatelessWidget {
   }
 }
 
-class Test extends StatelessWidget {
-  static const route = '/test';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: <Widget>[TextFormField()],
-      ),
-    );
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -82,7 +69,6 @@ class MyApp extends StatelessWidget {
         height: screen.myHeight, width: screen.myWidth, allowFontScaling: true);
     var languageCode = sharedPreferences.getString('languageCode');
     screen.size = MediaQuery.of(context).size;
-
     ScreenUtil screenUtil = ScreenUtil();
     var myCommontTextStyle = TextStyle(
       fontFamily: 'SFUIText',
@@ -92,7 +78,9 @@ class MyApp extends StatelessWidget {
     );
     LanguageLogic languageLogic = Provider.of(context);
     return MaterialApp(
-      builder: (_, Widget child) {
+      builder: (BuildContext context, Widget child) {
+        CompleteElementModel.context = context;
+
         return SafeArea(
           child: ScrollConfiguration(
             behavior: MyScrollBehavior(),
@@ -114,14 +102,13 @@ class MyApp extends StatelessWidget {
       ],
       routes: {
         MyMap.route: (_) => FullScreenMap(),
-        Test.route: (_) => Test(),
         Splash.route: (_) => Splash(),
         MoreRoot.route: (_) => MoreRoot(),
         InfoRoot.route: (_) => InfoRoot(),
         BnvRoot.route: (_) => BnvRoot(),
         SignUp.route: (_) => SignUp(),
         Login.route: (_) => Login(),
-        CheckOut.route: (_) => CheckOut(),
+//        CheckOut.route: (_) => CheckOut(),
         BookFlight.route: (_) => BookFlight(),
         ForgetPassword.route: (_) => ForgetPassword(),
         Filter.route: (_) => Filter(),

@@ -24,7 +24,7 @@ abstract class MyModelWithDatWithHeader<CR> extends MyModelWithData<CR> {
   MyModelWithDatWithHeader(BuildContext context, Map<String, dynamic> response)
       : super(context, response);
   String get header =>
-      headerTranslations[Methods.languageIndex(context, headerTranslations)]
+      headerTranslations[Methods(context).languageIndex(headerTranslations)]
           ['title'];
 
   Map<String, dynamic> get headerRoot => success['header'];

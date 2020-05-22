@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
+import 'package:m/commons/widgets/title_and_show_more.dart';
 import 'package:m/screens/out_bnv/info/ui.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,10 @@ import '../model.dart';
 import 'info.dart';
 
 class UserInfo extends StatelessWidget {
-  final User user;
-  UserInfo(this.user);
+  Widget image;
+  Widget name;
+  Widget email;
+  UserInfo({this.image, this.email, this.name});
   @override
   Widget build(BuildContext context) {
     var screen = Provider.of<Screen>(context);
@@ -24,46 +27,30 @@ class UserInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.all(
-              Radius.circular(screen.aspectRatioConverter(10))),
-          child: Image.network(
-            user.avatar,
+        SizedBox(
             height: screen.heightConverter(100),
             width: screen.widthConverter(90),
-            fit: BoxFit.cover,
-          ),
-        ),
+            child: image),
         Padding(
             padding: EdgeInsets.only(
           left: screen.widthConverter(11),
         )),
         Expanded(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
-                user.name,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: textTheme.body2,
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: screen.heightConverter(5)),
+                child: name,
               ),
-
-              // Spacer(
-              //   flex: 2,
-              // ),
-
-              // Spacer(
-              //   flex: 1,
-              // ),
-              InfoLine(
-                iconData: Icons.email,
-                text: user.email,
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: screen.heightConverter(5)),
+                child: email,
               ),
-              // Spacer(
-              //   flex: 1,
-              // ),
             ],
           ),
         )

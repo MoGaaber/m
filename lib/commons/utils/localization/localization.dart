@@ -17,15 +17,23 @@ class Localization {
       'auth': [
         'Login',
         'Sign up',
+        'Create new account',
         'Forget password',
         'First name',
         'Last name',
         'Email',
         'Password',
+        'Repeat password',
         'This Field is required',
         'Invalid email Address',
         'Password must be equal or greater than 8 letters',
-        'Password not identical'
+        'Password not identical',
+        'Reset your password',
+        'Problem in our server we art working on fix it',
+        'Problem in your network connection .. please check it',
+        'Recheck your Email and password',
+        'Recheck your Email',
+        'Email address is Already Taken'
       ],
       'filter': [
         'Filters',
@@ -36,12 +44,33 @@ class Localization {
         'Filters',
         'Clear Filter'
       ],
-      'more': ['More', 'Less', 'View on map']
+      'more': ['More', 'Less', 'View on map'],
     },
     'ar': {
       'language': ['اللغة'],
       'search': 'البحث',
       'profile': ['الملف الشخصي', 'اللغه', 'تسجيل الخروج'],
+      'auth': [
+        'تسجيل الدخول',
+        'التسجيل كمستخدم جديد',
+        'عمل حساب جديد',
+        'نسيت كلمة المرور',
+        'الإسم الأول',
+        'الإسم الاخير',
+        'البريد الإلكتروني',
+        'كلمة المرور',
+        'أعد كتابة كلمة المرور',
+        'هذا الحقل مطلوب',
+        'البريد الإلكتروني غير صحيح',
+        'كلمه المرور يجب ان تكون 8 حروف على الأقل',
+        'كلمة المرور غير متطابقة',
+        'أعد تعيين كلمة المرور',
+        'هناك مشكلة فى سيرفرنا نحن نعمل الآن على حلها',
+        'هناك مشكلة في إتصالك بالإنترنت',
+        'تأكد من البريد الإلكترونى وكلمة المرور',
+        'تأكد من بريدك الإلكتروني',
+        'هذا البريد مستخدم من قبل مستخدم آخر'
+      ],
       'filter': [
         'التصفيات',
         'المدينة',
@@ -59,6 +88,7 @@ class Localization {
   }
 
   List<String> get language => langugeCode['language'];
+  List<String> get auth => langugeCode['auth'];
 
   String get search => langugeCode['search'];
   List<String> get profile => langugeCode['profile'];

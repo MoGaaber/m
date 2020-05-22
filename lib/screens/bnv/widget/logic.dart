@@ -1,3 +1,5 @@
+import 'package:connectivity/connectivity.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +21,10 @@ class BnvLogic with ChangeNotifier {
   int oldIndex = 0;
   int currentIndex = 0;
   static String serachLanguage;
+
+  Future<ConnectivityResult> netConnection;
+  Future<bool> realNetConnection;
+
   var bnv = [
     BnvIconModel(FontAwesomeIcons.suitcaseRolling, TripsRoot(), selected: true),
     BnvIconModel(
@@ -30,6 +36,26 @@ class BnvLogic with ChangeNotifier {
       ProfileRoot(),
     )
   ];
+  BnvLogic() {
+    netConnection = getNetConnection;
+    realNetConnection = getrealNetConnection;
+    ;
+  }
+
+  Future<ConnectivityResult> get getNetConnection =>
+      Connectivity().checkConnectivity();
+  Future<bool> get getrealNetConnection =>
+      DataConnectionChecker().hasConnection;
+
+  void refetchNetConnection() {
+    netConnection = getNetConnection;
+    notifyListeners();
+  }
+
+  void refetchRealNetConnection() {
+    realNetConnection = getrealNetConnection;
+    notifyListeners();
+  }
 
   static void restoreLanguage() {
     if (CompleteElementModel.languageCode !=

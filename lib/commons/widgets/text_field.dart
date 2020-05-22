@@ -71,7 +71,7 @@ class MyTextField extends StatelessWidget {
                   onChanged: this.onChanged,
                   validator: (text) {
                     if (text.isEmpty) {
-                      return 'This field is Required';
+                      return Localization.of(context).auth[9];
                     }
                     if (this.validator != null) {
                       return this.validator(text);

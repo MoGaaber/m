@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/commons/widgets/map.dart';
+import 'package:m/commons/widgets/slider.dart';
 import 'package:m/screens/out_bnv/info/logic.dart';
 import 'package:provider/provider.dart';
 import '../photo_view/model.dart';
@@ -41,62 +42,15 @@ class Info extends StatelessWidget {
             backgroundColor: Colors.white,
             expandedHeight: screen.heightConverter(200),
             flexibleSpace: !horizontalListElement.isOtherImagesEmpty
-                ? FlexibleSpaceBar(
-                    background: GestureDetector(
-                    onTap: () {},
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: <Widget>[
-                        Carousel(
-                          onImageTap: (index) {
-                            print(index);
-                            Navigator.of(context).pushNamed(MyPhotoView.route,
-                                arguments: PhotoViewArguments(
-                                    horizontalListElement.getAllImages, index));
-                          },
-                          images: [
-                            for (var imageUrl
-                                in horizontalListElement.getAllImages)
-                              Stack(
-                                fit: StackFit.expand,
-                                children: <Widget>[
-                                  CachedNetworkImage(
-                                    imageUrl: imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Container(
-                                    color: Colors.black.withOpacity(0.6),
-                                  ),
-                                ],
-                              )
-                          ],
-                          boxFit: BoxFit.cover,
-                          overlayShadow: false,
-                          showIndicator: true,
-                          autoplay: false,
-                          dotSize: 6,
-                        ),
-                        IgnorePointer(
-                          child: Column(
-                            children: <Widget>[
-                              Spacer(
-                                flex: 2,
-                              ),
-                              Text(
-                                horizontalListElement.getTitle,
-                                style: textTheme.display2
-                                    .copyWith(color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                              Spacer(
-                                flex: 3,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ))
+                ? MySlider(
+                    horizontalListElement.getTitle,
+                    horizontalListElement.getAllImages,
+                    onTap: (index) {
+                      Navigator.of(context).pushNamed(MyPhotoView.route,
+                          arguments: PhotoViewArguments(
+                              horizontalListElement.getAllImages, index));
+                    },
+                  )
                 : ImageWithItsText(
                     haveRadius: false,
                     imageUrl: horizontalListElement.mainImagePath,

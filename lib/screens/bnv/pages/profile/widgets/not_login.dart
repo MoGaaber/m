@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/screens/out_bnv/auth/ui/login.dart';
 import 'package:m/screens/out_bnv/auth/ui/register.dart';
@@ -13,36 +14,46 @@ class NotLoginYet extends StatelessWidget {
     var screen = Provider.of<Screen>(context);
     var themeData = Theme.of(context);
     var logic = Provider.of<ProfileLogic>(context);
+    var localization = Localization.of(context).auth;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Icon(
-          FontAwesomeIcons.lock,
-          color: Colors.red,
-          size: screen.heightConverter(100),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: screen.heightConverter(120)),
-        ),
-        FlatButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SignUp.route);
-          },
-          child: Text('SignUp'),
-          color: themeData.accentColor,
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: screen.heightConverter(15)),
-        ),
-        FlatButton(
-          onPressed: () async {
-            logic.user = await Navigator.pushNamed(context, Login.route);
-          },
-          child: Text('Login'),
-          color: themeData.accentColor,
-        )
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screen.widthConverter(20.5)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Spacer(
+            flex: 3,
+          ),
+          Icon(
+            FontAwesomeIcons.userLock,
+            color: Colors.black,
+            size: screen.heightConverter(100),
+          ),
+          Spacer(
+            flex: 4,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SignUp.route);
+            },
+            child: Text(localization[1]),
+            color: themeData.accentColor,
+          ),
+          Spacer(
+            flex: 1,
+          ),
+          FlatButton(
+            onPressed: () async {
+              logic.user = await Navigator.pushNamed(context, Login.route);
+            },
+            child: Text(localization[0]),
+            color: themeData.accentColor,
+          ),
+          Spacer(
+            flex: 4,
+          ),
+        ],
+      ),
     );
   }
 }

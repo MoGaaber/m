@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:m/commons/utils/localization/localization.dart';
+import 'package:m/commons/utils/methods.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/text_field.dart';
+import 'package:m/screens/out_bnv/auth/validators.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/email.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/password.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -18,18 +21,25 @@ class Login extends StatelessWidget {
     Screen screen = Provider.of(context);
     ThemeData themeData = Theme.of(context);
     TextTheme textTheme = themeData.textTheme;
-
+    var localization = Localization.of(context).auth;
     return ChangeNotifierProvider(
-        create: (BuildContext context) => AuthLogic(context),
+        create: (_) => AuthLogic(context),
         child: Consumer<AuthLogic>(
-          builder: (BuildContext ctx, AuthLogic logic, Widget child) =>
+          builder: (BuildContext context, AuthLogic logic, Widget child) =>
               SafeArea(
                   child: Scaffold(
-                      floatingActionButton: FloatingActionButton(onPressed: () {
-                        logic.emailController.text = 'hhh@yahoo.com';
-                        logic.passwordController.text = 'gaber123';
-                      }),
-                      key: AuthLogic.scaffoldKey,
+                      floatingActionButton: FloatingActionButton(
+                        onPressed: () async {
+                          logic.emailController.text = 'hhh@yahoo.com';
+                          logic.passwordController.text = 'gaber123';
+
+                          // Methods(context).showProgressDialog();
+                          // await Future.delayed(Duration(seconds: 2));
+                          // Methods(context).hideProgressDialog();
+                        },
+                        heroTag: '!fds',
+                      ),
+                      key: AuthLogic.loginKey,
                       appBar: AppBar(),
                       body: Form(
                         key: AuthLogic.loginFormKey,
@@ -38,7 +48,7 @@ class Login extends StatelessWidget {
                                 horizontal: screen.widthConverter(20.5)),
                             children: <Widget>[
                               Text(
-                                'Sign in',
+                                localization[0],
                                 style: textTheme.display2,
                               ),
                               Padding(
@@ -46,31 +56,36 @@ class Login extends StatelessWidget {
                                       bottom: screen.heightConverter(23))),
                               EmailTextField(),
                               PasswordTextField(
+                                validator:
+                                    TextFieldValidators(context).password,
+                                hintText: localization[7],
                                 onTabTrailling: () {},
                                 textEditingController: logic.passwordController,
                                 obscureText: logic.obscurePassword,
                               ),
                               Padding(
                                   child: FlatButton(
-                                    onPressed: logic.login,
-                                    child: Text('Sign in'),
+                                    onPressed: () {
+                                      logic.login(context);
+                                    },
+                                    child: Text(localization[0]),
                                     color: themeData.accentColor,
                                   ),
                                   padding: EdgeInsets.symmetric(
                                       vertical: screen.heightConverter(33.5))),
-                              Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, ForgetPassword.route);
-                                  },
-                                  child: Text(
-                                    'Forget password',
-                                    style: textTheme.body1.copyWith(
-                                        color: theme.primaryColorDark),
-                                  ),
-                                ),
-                              ),
+                              // Center(
+                              //   child: GestureDetector(
+                              //     onTap: () {
+                              //       Navigator.pushNamed(
+                              //           context, ForgetPassword.route);
+                              //     },
+                              //     child: Text(
+                              //       localization[3],
+                              //       style: textTheme.body1.copyWith(
+                              //           color: theme.primaryColorDark),
+                              //     ),
+                              //   ),
+                              // ),
                             ]),
                       ))),
         ));

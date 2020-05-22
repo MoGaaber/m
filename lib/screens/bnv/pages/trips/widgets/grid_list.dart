@@ -22,7 +22,6 @@ class GridList extends StatelessWidget {
     var theme = Theme.of(context);
     TextTheme textTheme = theme.textTheme;
     var logic = Provider.of<TripsLogic>(context, listen: false);
-
     return MyFutureBuilder<Response<Map<String, dynamic>>>(
         request: logic.getTopDestinations,
         empty: Text('networdl'),
@@ -32,8 +31,14 @@ class GridList extends StatelessWidget {
           GridListModel gridListModel = GridListModel(context, snapshot.data);
           return Column(
             children: <Widget>[
-              ListTitle(Text(gridListModel.header, style: textTheme.body2),
-                  MyGridView(gridViewItem, data: gridListModel.castedResponse))
+              ListTitle(
+                Text(
+                  gridListModel.header,
+                  style: textTheme.body2,
+                ),
+                MyGridView(gridViewItem, data: gridListModel.castedResponse),
+                top: 10,
+              )
             ],
           );
         },
@@ -85,8 +90,9 @@ Widget gridViewItem(
     imageUrl: data[index].mainImage,
     alignmentGeometry: Alignment(0, 0.90),
     text: Text(
-      data[index].title,
+      data[index].title + 'fpodjfpodsjfpo ojgofjgfodp',
       style: textTheme.caption,
+      textAlign: TextAlign.center,
     ),
   );
 }

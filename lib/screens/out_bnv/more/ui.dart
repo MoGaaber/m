@@ -41,7 +41,7 @@ class More extends StatelessWidget {
       },
       child: Scaffold(
           body: NestedScrollViewRefreshIndicator(
-        onRefresh: () {},
+        onRefresh: logic.refresh,
         child: extended.NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) => [
@@ -56,7 +56,7 @@ class More extends StatelessWidget {
                                 padding: EdgeInsets.only(
                                     left: screen.widthConverter(25),
                                     right: screen.widthConverter(25),
-                                    top: screen.heightConverter(10),
+                                    top: screen.heightConverter(40),
                                     bottom: screen.heightConverter(0)),
                                 child: MySearchTextField(
                                   onChanged: (String text) =>
@@ -68,10 +68,15 @@ class More extends StatelessWidget {
                                 )),
                           ),
                         ),
-                        expandedHeight: screen.heightConverter(120),
+                        expandedHeight: screen.heightConverter(130),
                       )
                     ],
-            body: body),
+            body: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: screen.widthConverter(19),
+                  vertical: screen.heightConverter(20)),
+              child: body,
+            )),
       )),
     );
   }

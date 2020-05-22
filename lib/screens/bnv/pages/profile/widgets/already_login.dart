@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
+import 'package:m/commons/widgets/title_and_show_more.dart';
 import 'package:m/constants/apis_url.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/arrow.dart';
@@ -24,6 +25,9 @@ class AlreadyLogedIn extends StatelessWidget {
     var screen = Provider.of<Screen>(context);
     var logic = Provider.of<ProfileLogic>(context);
     User user = logic.user;
+    var themeData = Theme.of(context);
+    var textTheme = themeData.textTheme;
+
     var localization = Localization.of(context).profile;
     LanguageLogic languageLogic = Provider.of(context);
     return Column(
@@ -36,10 +40,66 @@ class AlreadyLogedIn extends StatelessWidget {
                 serverError: Text('networdl'),
                 networkError: Text('networdl'),
                 fullResponse: (snapshot) {
-                  return UserInfo(User.fromJson(snapshot.data['success']));
+                  User user = User.fromJson(snapshot.data['success']);
+                  return UserInfo(
+                    email: InfoLine(
+                      iconData: Icons.email,
+                      child: Text(
+                        user.email,
+                        style: textTheme.subtitle,
+                        // maxLines: 1,
+                      ),
+                    ),
+                    image: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(screen.aspectRatioConverter(10))),
+                      child: Image.network(
+                        user.avatar,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    name: Text(
+                      user.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: textTheme.body2,
+                    ),
+                  );
                 },
-                loading: SizedBox.shrink())
-            : UserInfo(user),
+                loading: UserInfo(
+                  image: myShimmer(context: context),
+                  email: InfoLine(
+                    iconData: Icons.email,
+                    child: SizedBox(
+                        height: screen.heightConverter(10),
+                        width: screen.widthConverter(100),
+                        child: myShimmer(context: context)),
+                  ),
+                  name: SizedBox(
+                      height: screen.heightConverter(10),
+                      width: screen.widthConverter(100),
+                      child: myShimmer(context: context)),
+                ))
+            : UserInfo(
+                email: InfoLine(
+                  iconData: Icons.email,
+                  child: Text(
+                    user.email,
+                    style: textTheme.subtitle,
+                    // maxLines: 1,
+                  ),
+                ),
+                image: Image.network(
+                  user.avatar,
+                  fit: BoxFit.cover,
+                ),
+                name: Text(
+                  user.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: textTheme.body2,
+                ),
+              ),
         Padding(padding: EdgeInsets.only(top: screen.heightConverter(35))),
         SettingTile(localization[1],
             ArrowWithText(languageLogic.selectedLanguageName(context)), () {

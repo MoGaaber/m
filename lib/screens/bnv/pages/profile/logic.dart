@@ -37,13 +37,14 @@ class ProfileLogic with ChangeNotifier {
         }));
   }
 
-  void unFetchProfileInfo() {
-    this.getProfileInfo = null;
-  }
-
   Future<void> refresh() {
-    unFetchProfileInfo();
-    notifyListeners();
+    if (user != null) {
+      user = null;
+      notifyListeners();
+    } else {
+      this.getProfileInfo = null;
+      notifyListeners();
+    }
     return getProfileInfo = fetchProfileInfo();
   }
 }

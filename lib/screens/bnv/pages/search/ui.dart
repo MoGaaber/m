@@ -16,25 +16,21 @@ import 'package:provider/provider.dart';
 
 import 'logic.dart';
 
-class SearchRoot extends StatelessWidget {
-//   @override
-//   _SearchRootState createState() => _SearchRootState();
-// }
+class SearchRoot extends StatefulWidget {
+  @override
+  _SearchRootState createState() => _SearchRootState();
+}
 
-// class _SearchRootState extends State<SearchRoot>
-//     with AutomaticKeepAliveClientMixin<SearchRoot> {
+class _SearchRootState extends State<SearchRoot>
+    with AutomaticKeepAliveClientMixin<SearchRoot> {
   @override
   Widget build(BuildContext ctx) {
-    print('!!!!!!');
-    // super.build(context);
-    return ChangeNotifierProvider(
-      child: Search(),
-      create: (BuildContext context) => SearchLogic(ctx),
-    );
+    super.build(ctx);
+    return Search();
   }
 
-  // @override
-  // bool get wantKeepAlive => true;
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class Search extends StatelessWidget {
@@ -43,7 +39,6 @@ class Search extends StatelessWidget {
     var screen = Provider.of<Screen>(
       context,
     );
-    CompleteElementModel.context = context;
     var logic = Provider.of<SearchLogic>(context, listen: true);
     return Padding(
       padding: EdgeInsets.only(
@@ -54,29 +49,23 @@ class Search extends StatelessWidget {
         children: <Widget>[
           Directionality(
             textDirection: logic.isEn ? TextDirection.ltr : TextDirection.rtl,
-            child: MyTextField(Localization.of(context).search,
-                onChanged: (input) {
-              logic.onChangeSearchText(context, input);
-            },
-                controller: logic.textEditingController,
-                suffix: InkWell(
-                  onTap: () {
-                    logic.clearSearchField();
-                  },
-                  child: GestureDetector(
-                    onTap: () {
-                      logic.clearSearchField();
-                      print('hellooo');
-                    },
-                    child: Icon(
-                      Icons.close,
-                      size: screen.aspectRatioConverter(28),
-                    ),
-                  ),
-                  // contentPadding: EdgeInsets.symmetric(
-                  //     vertical: screen.heightConverter(10),
-                  //     horizontal: screen.widthConverter(10)),
-                )),
+            child: MyTextField(
+              Localization.of(context).search,
+              onChanged: (input) {
+                logic.onChangeSearchText(context, input);
+              },
+              controller: logic.textEditingController,
+              suffix: GestureDetector(
+                onTap: logic.clearSearchField,
+                child: Icon(
+                  Icons.close,
+                  size: screen.aspectRatioConverter(28),
+                ),
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: screen.heightConverter(10),
+                  horizontal: screen.widthConverter(10)),
+            ),
           ),
           Padding(padding: EdgeInsets.only(top: screen.heightConverter(16))),
           Expanded(
@@ -100,7 +89,7 @@ class Search extends StatelessWidget {
                                 (BuildContext context, int index) => Divider(),
                             physics: BouncingScrollPhysics(),
                             itemCount: searchResult.length,
-                            itemBuilder: (BuildContext context, int index) {
+                            itemBuilder: (_, int index) {
                               var element = searchResult[index];
                               return Column(
                                 children: <Widget>[
@@ -109,7 +98,7 @@ class Search extends StatelessWidget {
                                       element.adultPrice + r"$",
                                       style: TextStyle(color: Colors.green),
                                     ),
-                                    trailing: MyImage(searchResult, index),
+                                    leading: MyImage(searchResult, index),
                                     onTap: () {
                                       Navigator.pushNamed(
                                           context, InfoRoot.route,
@@ -124,8 +113,7 @@ class Search extends StatelessWidget {
                             });
                       },
                       loading: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) =>
-                            Padding(
+                        itemBuilder: (_, int index) => Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: screen.heightConverter(10)),
                           child: SizedBox.fromSize(

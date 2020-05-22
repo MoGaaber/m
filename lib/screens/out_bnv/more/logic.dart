@@ -27,10 +27,8 @@ class MoreLogic extends ChangeNotifier {
 
   void onChanged(BuildContext context, String text) {
     searchList.clear();
-    print('hhhhhhhhh');
     if (text.isNotEmpty) {
       if (firstLetter != text[0]) {
-        print('hey iam caallll');
         var languageCode = Constants.checkLanguage(text.toLowerCase());
         if (languageCode != Localization.of(context).locale.languageCode) {
           CompleteElementModel.languageCode = languageCode;

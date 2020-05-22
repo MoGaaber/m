@@ -21,17 +21,25 @@ class SignUp extends StatelessWidget {
     Screen screen = Provider.of(context);
     ThemeData themeData = Theme.of(context);
     TextTheme textTheme = themeData.textTheme;
-    AuthLogic.setProgressDialog(context);
-    var authConstants = AuthConstants(context);
-    var contentPaddingField = authConstants.contentPaddingField;
-    var localization = Localization.of(context);
-    var languageCode = localization.langugeCode;
+    var localization = Localization.of(context).auth;
+
     return ChangeNotifierProvider(
       create: (_) => AuthLogic(context),
       child: Consumer<AuthLogic>(
           builder: (BuildContext context, AuthLogic logic, Widget child) =>
               SafeArea(
                   child: Scaffold(
+                      floatingActionButton: FloatingActionButton(
+                          heroTag: 'ss',
+                          onPressed: () {
+                            logic.fNameController.text = 'h';
+                            logic.lNameController.text = 'h';
+
+                            logic.emailController.text = 'hhh@yahoo.com';
+                            logic.passwordController.text = 'gaber123';
+                            logic.passwordConfirmationController.text =
+                                'gaber123';
+                          }),
                       key: AuthLogic.scaffoldKey,
                       appBar: AppBar(),
                       body: Form(
@@ -41,7 +49,7 @@ class SignUp extends StatelessWidget {
                                 horizontal: screen.widthConverter(20.5)),
                             children: <Widget>[
                               Text(
-                                'Create new account',
+                                localization[2],
                                 style: textTheme.display2,
                               ),
                               Center(
@@ -55,15 +63,6 @@ class SignUp extends StatelessWidget {
                                         Container(
                                           height: screen.heightConverter(150),
                                           width: screen.widthConverter(200),
-                                          decoration: BoxDecoration(
-
-                                              // boxShadow: [
-                                              // BoxShadow(
-                                              //     blurRadius: screen.heightConverter(20),
-                                              //     spreadRadius: screen.heightConverter(5),
-                                              //     color: Colors.grey.withOpacity(0.5))
-                                              // ], shape: BoxShape.circle
-                                              ),
                                           child: Center(
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.all(
@@ -91,12 +90,6 @@ class SignUp extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        // AvatarIcon(
-                                        //     Icons.cancel,
-                                        //     Colors.red,
-                                        //     () => logic.removeSelectedAvatar(),
-                                        //     -50,
-                                        //     -15),
                                         value == null
                                             ? Positioned(
                                                 height:
@@ -133,12 +126,12 @@ class SignUp extends StatelessWidget {
                                 ),
                               ),
                               MyTextField(
-                                'First Name',
+                                localization[4],
                                 // contentPadding: contentPaddingField,
                                 controller: logic.fNameController,
                               ),
                               MyTextField(
-                                'Last Name',
+                                localization[5],
                                 // contentPadding: contentPaddingField,
                                 controller: logic.lNameController,
                               ),
@@ -147,11 +140,12 @@ class SignUp extends StatelessWidget {
                                 builder: (BuildContext context, bool value,
                                         Widget child) =>
                                     PasswordTextField(
+                                  hintText: localization[7],
                                   onTabTrailling: () {
                                     logic.onTapEye(logic.toogleObscure);
                                   },
                                   validator:
-                                      TextFieldValidators(logic).password,
+                                      TextFieldValidators(context).password,
                                   textEditingController:
                                       logic.passwordController,
                                   obscureText: logic.obscurePassword,
@@ -163,12 +157,13 @@ class SignUp extends StatelessWidget {
                                 builder: (BuildContext context, bool value,
                                         Widget child) =>
                                     PasswordTextField(
+                                  hintText: localization[8],
                                   onTabTrailling: () {
                                     logic.onTapEye(
                                         logic.toogleObscureConfirmation);
                                   },
                                   obscureText: value,
-                                  validator: TextFieldValidators(logic)
+                                  validator: TextFieldValidators(context)
                                       .passwordConfirmation,
                                   textEditingController:
                                       logic.passwordConfirmationController,
@@ -178,9 +173,11 @@ class SignUp extends StatelessWidget {
                               ),
                               Padding(
                                   child: FlatButton(
-                                    onPressed: logic.register,
+                                    onPressed: () {
+                                      logic.register(context);
+                                    },
                                     child: Text(
-                                      'Sign up',
+                                      localization[1],
                                       style: textTheme.button,
                                     ),
                                     color: themeData.accentColor,

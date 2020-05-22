@@ -12,14 +12,21 @@ import 'package:provider/provider.dart';
 
 import 'logic.dart';
 
-class ProfileRoot extends StatelessWidget {
+class ProfileRoot extends StatefulWidget {
+  @override
+  _ProfileRootState createState() => _ProfileRootState();
+}
+
+class _ProfileRootState extends State<ProfileRoot>
+    with AutomaticKeepAliveClientMixin<ProfileRoot> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => ProfileLogic(),
-      child: Profile(),
-    );
+    super.build(context);
+    return Profile();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class Profile extends StatelessWidget {
@@ -29,31 +36,29 @@ class Profile extends StatelessWidget {
     var themeData = Theme.of(context);
     var textTheme = themeData.textTheme;
     var logic = Provider.of<ProfileLogic>(context);
-    Geolocator().getCurrentPosition().then((x) {
-      print(x.latitude);
-    });
+
     return SafeArea(
         child: Scaffold(
-      body: RefreshIndicator(
-        child: ListView(
-          padding:
-              EdgeInsets.symmetric(horizontal: screen.widthConverter(20.5)),
-          children: <Widget>[
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: screen.heightConverter(25)),
-              child: Text(
-                Localization.of(context).profile[0],
-                style: textTheme.display2,
+      body: sharedPreferences?.getBool('isLoggedIn') ?? false
+          ? RefreshIndicator(
+              child: ListView(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screen.widthConverter(20.5)),
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: screen.heightConverter(25)),
+                    child: Text(
+                      Localization.of(context).profile[0],
+                      style: textTheme.display2,
+                    ),
+                  ),
+                  AlreadyLogedIn()
+                ],
               ),
-            ),
-            sharedPreferences?.getBool('isLoggedIn') ?? false
-                ? AlreadyLogedIn()
-                : NotLoginYet()
-          ],
-        ),
-        onRefresh: logic.refresh,
-      ),
+              onRefresh: logic.refresh,
+            )
+          : NotLoginYet(),
     ));
     ;
   }

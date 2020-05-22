@@ -9,7 +9,8 @@ typedef Widget Item<LT>(
 class ListTitle extends StatelessWidget {
   final Widget title;
   final Widget list;
-  ListTitle(this.title, this.list);
+  final double top;
+  ListTitle(this.title, this.list, {this.top = 23.5});
   @override
   Widget build(BuildContext context) {
     Screen screen = Provider.of(context);
@@ -18,7 +19,7 @@ class ListTitle extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-              top: screen.heightConverter(23.5),
+              top: screen.heightConverter(top),
               bottom: screen.heightConverter(13),
               right: screen.widthConverter(18.5),
               left: screen.widthConverter(16)),
@@ -31,7 +32,10 @@ class ListTitle extends StatelessWidget {
 }
 
 Widget myShimmer(
-    {BuildContext context, List<dynamic> data, int index, void cast}) {
+    {@required BuildContext context,
+    List<dynamic> data,
+    int index,
+    void cast}) {
   Screen screen = Provider.of<Screen>(context);
 
   return Shimmer.fromColors(

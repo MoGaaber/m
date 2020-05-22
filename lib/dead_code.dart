@@ -91,5 +91,51 @@ class HorizontalListDash extends StatelessWidget {
                   );
                 },
               ),
+              horizontalListViewItemOnline(
+    {BuildContext context, List<dynamic> data, int index, void cast}) {
+  var themeData = Theme.of(context);
+  var textTheme = themeData.textTheme;
+  var element = data[index];
+  return FutureBuilder<Response<Map<String, dynamic>>>(
+    future: Dio().get(ApisUrls.info + element['tour_id']),
+    builder: (BuildContext context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        var horizontalListElement =
+            CompleteElementModel.fromJson(snapshot.data.data['success']);
+        return ImageWithItsText(
+          onTap: () {
+            Navigator.pushNamed(context, InfoRoot.route,
+                arguments: horizontalListElement);
+          },
+          imageUrl: horizontalListElement.mainImagePath,
+          alignmentGeometry: Alignment(0, 0.90),
+          text: Text(
+            horizontalListElement.getTitle,
+            style: textTheme.caption,
+          ),
+        );
+      } else {
+        return myShimmer(context: context);
+      }
+    },
+  );
+}
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: MyFutureBuilder<Response>(
+            request: Dio().get(ApisUrls.slider),
+            empty: Text('networdl'),
+            serverError: Text('networdl'),
+            networkError: Text('networdl'),
+            fullResponse: (snapshot) {
+              // SliderModel sliderModel = SliderModel(context, snapshot.data);
+              return Container(height: 200, width: 200, color: Colors.red);
+            },
+            loading: SizedBox.shrink()));
+  }
+}
+
 
 */
