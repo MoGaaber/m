@@ -90,7 +90,7 @@ Widget gridViewItem(
     imageUrl: data[index].mainImage,
     alignmentGeometry: Alignment(0, 0.90),
     text: Text(
-      data[index].title + 'fpodjfpodsjfpo ojgofjgfodp',
+      data[index].title,
       style: textTheme.caption,
       textAlign: TextAlign.center,
     ),

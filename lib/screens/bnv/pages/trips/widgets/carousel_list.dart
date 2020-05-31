@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,8 +15,6 @@ import 'package:m/commons/models/image_and_text._model.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
-import 'package:m/packages/extended_image.dart';
-import 'package:m/packages/src/extended_image.dart';
 import 'package:m/screens/bnv/pages/trips/models/slider_list.dart';
 import 'package:provider/provider.dart';
 

@@ -2,6 +2,8 @@ class ApisUrls {
   static const root = 'http://test.touri.sa/api';
   static const signUp = '$root/signup';
   static const signIn = '$root/login';
+  static const book = '$root/book';
+
   static const languages = '$root/languages';
   static const searchAndFilter = '$root/tours';
   static const mainPage = '$root/main';

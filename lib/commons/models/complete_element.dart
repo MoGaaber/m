@@ -5,6 +5,7 @@ import 'package:m/commons/utils/methods.dart';
 
 class CompleteElementModel {
   String lat;
+  int id;
   String lon;
   List otherImages;
   String mainImagePath;
@@ -16,6 +17,7 @@ class CompleteElementModel {
   static String languageCode = deviceLanguageCode;
 
   CompleteElementModel({
+    @required this.id,
     this.lat,
     this.lon,
     this.adultPrice,
@@ -68,6 +70,7 @@ class CompleteElementModel {
   bool get isRelatedEmpty => related.isEmpty;
   factory CompleteElementModel.fromJson(Map<String, dynamic> json) =>
       CompleteElementModel(
+        id: json['id'],
         lat: json["lat"],
         lon: json["lon"],
         adultPrice: json['adult_price'] ?? '',

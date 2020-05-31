@@ -3,7 +3,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:m/commons/models/complete_element.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/constants/apis_url.dart';

@@ -6,7 +6,6 @@ import 'package:m/commons/widgets/text_field.dart';
 import 'package:m/screens/out_bnv/auth/validators.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/email.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/password.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../logic.dart';

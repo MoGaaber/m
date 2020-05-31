@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dio/dio.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:m/commons/models/complete_element.dart';
 import 'package:m/commons/utils/screen.dart';
@@ -7,14 +8,13 @@ import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
 import 'package:m/constants/apis_url.dart';
-import 'package:m/packages/extended_image.dart';
 import 'package:m/screens/bnv/pages/search/image.dart';
 import 'package:m/screens/bnv/pages/search/model.dart';
 import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
 import 'package:m/screens/bnv/pages/trips/widgets/carousel_list.dart';
 import 'package:m/screens/out_bnv/info/ui.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../logic.dart';
 
 class HorizontalList extends StatelessWidget {
@@ -123,6 +123,7 @@ Widget horizontalListViewItem(
   var logic = Provider.of<TripsLogic>(context);
 
   return Material(
+    color: Colors.transparent,
     child: InkWell(
       onTap: () {
         logic.onTap(context, element);
@@ -133,9 +134,11 @@ Widget horizontalListViewItem(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Expanded(
-              flex: 5,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                  Radius.circular(screen.aspectRatioConverter(20))),
               child: ExtendedImage.network(
-                data[index].mainImagePath + 'fdkfdojkdopokfdo',
+                data[index].mainImagePath,
                 fit: BoxFit.cover,
                 loadStateChanged: (ExtendedImageState state) {
                   var loadState = state.extendedImageLoadState;
@@ -172,16 +175,17 @@ Widget horizontalListViewItem(
                     );
                   }
                 },
-              )),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(top: screen.heightConverter(5)),
-              child: AutoSizeText(
-                element.getTitle,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: textTheme.caption.copyWith(color: Colors.black),
               ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: screen.heightConverter(5)),
+            child: AutoSizeText(
+              element.getTitle,
+              maxLines: 1,
+              maxFontSize: textTheme.caption.fontSize.roundToDouble(),
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.caption.copyWith(color: Colors.black),
             ),
           ),
         ],

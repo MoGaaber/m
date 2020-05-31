@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
         SignUp.route: (_) => SignUp(),
         Login.route: (_) => Login(),
 //        CheckOut.route: (_) => CheckOut(),
-        BookFlight.route: (_) => BookFlight(),
+        BookFlightRoot.route: (_) => BookFlightRoot(),
         ForgetPassword.route: (_) => ForgetPassword(),
         Filter.route: (_) => Filter(),
         Language.route: (_) => Language(),

@@ -5,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:m/commons/models/dio_response.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/methods.dart';

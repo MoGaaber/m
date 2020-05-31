@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/scroll_behavior.dart';
 import 'package:m/screens/bnv/pages/check_out/ui.dart';
@@ -8,34 +9,42 @@ import 'package:m/screens/out_bnv/auth/ui/login.dart';
 import 'package:m/screens/out_bnv/auth/ui/register.dart';
 import 'package:provider/provider.dart';
 
-class BookFlight extends StatefulWidget {
+import 'logic.dart';
+
+class BookFlightRoot extends StatelessWidget {
   static const route = '/book';
 
   @override
-  _BookFlightState createState() => _BookFlightState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => BookFlightLogic(),
+      child: BookFlight(),
+    );
+  }
 }
 
-class _BookFlightState extends State<BookFlight>
-    with AutomaticKeepAliveClientMixin<BookFlight> {
+class BookFlight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    BookFlightLogic logic = Provider.of<BookFlightLogic>(context);
+
     Screen screen = Provider.of(context);
     var theme = Theme.of(context);
     final textTheme = theme.textTheme;
     var smallButtontextStyle = textTheme.button.copyWith(
       fontSize: ScreenUtil().setSp(15),
     );
-    bool haveAppBar = ModalRoute.of(context).settings.arguments ?? false;
+    Map<String, dynamic> data = ModalRoute.of(context).settings.arguments;
+    logic.tourId = data['tourId'];
 
     return SafeArea(
         child: Scaffold(
-      appBar: haveAppBar ? AppBar() : null,
+      // appBar: haveAppBar ? AppBar() : null,
       body: ListView(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-                top: screen.heightConverter(haveAppBar ? 5 : 40),
+                top: screen.heightConverter(40),
                 bottom: screen.heightConverter(20)),
             child: Text(
               'Book This Tour',
@@ -78,10 +87,15 @@ class _BookFlightState extends State<BookFlight>
           Padding(
             padding: EdgeInsets.only(bottom: screen.heightConverter(20)),
           ),
-          MyField('tour', 'Old Jeddah City Tour', () {}),
-          MyField('Date', 'Select Date', () {
-            selectDate(context);
-          }),
+          MyField('tour', data['name'], () {}),
+          Selector<BookFlightLogic, String>(
+            builder: (BuildContext context, String value, Widget child) =>
+                MyField('Date', value ?? 'Select Date', () {
+              logic.selectDate(context);
+            }),
+            selector: (BuildContext, BookFlightLogic logic) =>
+                logic.formattedDate,
+          ),
           MyField('Passengers', '2 Adults', () {
             selectPassengers(context);
           }),
@@ -135,14 +149,6 @@ class MyField extends StatelessWidget {
   }
 }
 
-void selectDate(BuildContext context) {
-  showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2050));
-}
-
 void selectPassengers(BuildContext context) {
   Screen screen = Provider.of(context, listen: false);
   ThemeData theme = Theme.of(context);
@@ -160,7 +166,7 @@ void selectPassengers(BuildContext context) {
         ),
         child: ScrollConfiguration(
           behavior: MyScrollBehavior(),
-          child: ListView(
+          child: Column(
             children: <Widget>[
               ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 0),
@@ -169,18 +175,29 @@ void selectPassengers(BuildContext context) {
                         fontSize: ScreenUtil().setSp(15),
                         color: theme.accentColor,
                         fontWeight: FontWeight.w700)),
-                title: Text(
-                  'Cancel',
-                  style: textTheme.body1
-                      .copyWith(fontSize: ScreenUtil().setSp(15)),
+                title: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Text(
+                    'Cancel',
+                    style: textTheme.body1
+                        .copyWith(fontSize: ScreenUtil().setSp(15)),
+                  ),
                 ),
               ),
               Divider(
                 height: 0,
               ),
-              for (var i = 0; i < tiles.length; i++)
-                PassengerTile(tiles[i].title, tiles[i].subTitle, i, setState),
-              Padding(padding: EdgeInsets.only(top: screen.heightConverter(10)))
+              Expanded(
+                child: ListView.separated(
+                  itemCount: tiles.length,
+                  itemBuilder: (BuildContext context, int i) => PassengerTile(
+                      tiles[i].title, tiles[i].subTitle, i, setState),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Padding(
+                          padding:
+                              EdgeInsets.only(top: screen.heightConverter(10))),
+                ),
+              )
             ],
           ),
         ),
@@ -191,11 +208,11 @@ void selectPassengers(BuildContext context) {
 
 List<PassengetTileModel> tiles = [
   PassengetTileModel('Adults', '16+ years'),
-  PassengetTileModel(
-    'Teens',
-    '12-15 years',
-  ),
-  PassengetTileModel('Children', '2-11 years'),
+  // PassengetTileModel(
+  //   'Teens',
+  //   '12-15 years',
+  // ),
+  PassengetTileModel('Children', '2-16 years'),
   PassengetTileModel('Infant', 'under 2 years')
 ];
 
@@ -224,9 +241,6 @@ class PassengerTile extends StatelessWidget {
         ListTile(
           contentPadding:
               EdgeInsets.symmetric(vertical: screen.heightConverter(10)),
-
-          // contentPadding:
-          //     EdgeInsets.symmetric(vertical: screen.heightConverter(0)),
           trailing: SizedBox.fromSize(
             size: Size.fromWidth(screen.widthConverter(112)),
             child: Row(
