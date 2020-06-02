@@ -60,7 +60,6 @@ class ContextMateriaApp extends StatelessWidget {
         primaryColorDark: Color(0xff24253D),
         primaryColorLight: Color(0xff91919D),
       ),
-      home: MyApp(),
     );
   }
 }
@@ -121,7 +120,7 @@ class MyApp extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       title: 'Touri',
-      initialRoute: BnvRoot.route,
+      initialRoute: Splash.route,
       theme: ThemeData(
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(
