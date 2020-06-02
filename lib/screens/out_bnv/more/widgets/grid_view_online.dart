@@ -20,7 +20,7 @@ class GridViewOnline extends StatelessWidget {
     var logic = Provider.of<MoreLogic>(context, listen: false);
     logic.id = id;
     logic.request = Dio().get(ApisUrls.more + '/$id');
-
+    print(logic.id.toString() + 'mnmnmn');
     return Selector<MoreLogic, Future>(
         builder: (BuildContext context, Future value, Widget child) {
           return MyFutureBuilder<Response<Map<String, dynamic>>>(

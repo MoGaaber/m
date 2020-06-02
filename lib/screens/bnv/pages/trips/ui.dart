@@ -1,13 +1,7 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/search_field.dart';
-import 'package:m/constants/apis_url.dart';
-import 'package:m/main.dart';
-import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
 import 'package:m/screens/bnv/pages/trips/widgets/grid_list.dart';
 import 'package:m/screens/bnv/pages/trips/widgets/hiroz_list.dart';
 import 'package:m/screens/bnv/widget/bnv.dart';
@@ -23,6 +17,7 @@ class Trips extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = Provider.of<Screen>(context);
     var logic = Provider.of<TripsLogic>(context, listen: true);
+
     return logic.haveNetWorkError
         ? NetworkError(logic.fetchApi)
         : RefreshIndicator(

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/grid_card.dart';
-import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
-import 'package:m/screens/bnv/pages/trips/widgets/grid_list.dart';
-import 'package:provider/provider.dart';
-import '../logic.dart';
 import 'package:m/screens/out_bnv/more/model.dart';
+import 'package:provider/provider.dart';
+
+import '../logic.dart';
 
 class NormalGridView extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -16,11 +14,14 @@ class NormalGridView extends StatelessWidget {
     Screen screen = Provider.of(context);
     var logic = Provider.of<MoreLogic>(context, listen: false);
     logic.gridViewModel = GridViewModel(context, this.data);
+
     return Consumer<MoreLogic>(
       builder: (BuildContext context, MoreLogic logic, Widget child) => logic
               .gridViewModel.castedResponse.isEmpty
           ? Center(
-              child: Text('!!'),
+              child: Text(
+                'empty',
+              ),
             )
           : logic.searchList.isEmpty && logic.searchController.text.isNotEmpty
               ? Center(child: Text('Empty'))

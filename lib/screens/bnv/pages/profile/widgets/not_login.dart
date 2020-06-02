@@ -33,9 +33,10 @@ class NotLoginYet extends StatelessWidget {
             flex: 4,
           ),
           FlatButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SignUp.route);
-            },
+            onPressed: () async {
+           var x=    await Navigator.pushNamed(context, SignUp.route);
+           logic.notifyListeners();
+           },
             child: Text(localization[1]),
             color: themeData.accentColor,
           ),
@@ -45,6 +46,7 @@ class NotLoginYet extends StatelessWidget {
           FlatButton(
             onPressed: () async {
               logic.user = await Navigator.pushNamed(context, Login.route);
+              logic.notifyListeners();
             },
             child: Text(localization[0]),
             color: themeData.accentColor,

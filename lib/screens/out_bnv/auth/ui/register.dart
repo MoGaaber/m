@@ -1,15 +1,13 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/text_field.dart';
-import 'package:m/constants/apis_url.dart';
-import 'package:m/screens/out_bnv/auth/constants.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/email.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/password.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
+
 import '../logic.dart';
 import '../validators.dart';
 

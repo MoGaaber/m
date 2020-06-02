@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:location_permissions/location_permissions.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/already_login.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/not_login.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'logic.dart';
@@ -36,7 +33,6 @@ class Profile extends StatelessWidget {
     var themeData = Theme.of(context);
     var textTheme = themeData.textTheme;
     var logic = Provider.of<ProfileLogic>(context);
-
     return SafeArea(
         child: Scaffold(
       body: sharedPreferences?.getBool('isLoggedIn') ?? false

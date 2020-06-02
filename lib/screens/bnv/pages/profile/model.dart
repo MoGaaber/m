@@ -9,13 +9,17 @@ class User {
   factory User.fromJsonAfterLogin(Map<String, dynamic> json, String email) =>
       User(
           name: json["name"],
-          avatar: json["avatar"],
+          avatar: json["avatar"] == 'http://test.touri.sa/app/images/users'
+              ? null
+              : json['avatar'],
           token: json['token'],
           email: email);
 
   factory User.fromJson(Map<String, dynamic> json) => User(
       name: json["fname"] + ' ' + json['lname'],
-      avatar: json["avatar"],
+      avatar: json["avatar"] == 'http://test.touri.sa/app/images/users'
+          ? null
+          : json['avatar'],
       email: json['email']);
 }
 /*

@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
-import 'package:m/constants/apis_url.dart';
-import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/arrow.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/info.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/setting.dart';
@@ -30,6 +27,8 @@ class AlreadyLogedIn extends StatelessWidget {
 
     var localization = Localization.of(context).profile;
     LanguageLogic languageLogic = Provider.of(context);
+    print(user.avatar);
+    print('!!!!!!!');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -41,6 +40,10 @@ class AlreadyLogedIn extends StatelessWidget {
                 networkError: Text('networdl'),
                 fullResponse: (snapshot) {
                   User user = User.fromJson(snapshot.data['success']);
+                  print(user.token);
+                  print('!!!!!!g[pkp[fdkp[fgk');
+                  print(user.avatar);
+
                   return UserInfo(
                     email: InfoLine(
                       iconData: Icons.email,
@@ -50,14 +53,22 @@ class AlreadyLogedIn extends StatelessWidget {
                         // maxLines: 1,
                       ),
                     ),
-                    image: ClipRRect(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(screen.aspectRatioConverter(10))),
-                      child: Image.network(
-                        user.avatar,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    image: user.avatar != null
+                        ? Image.asset(
+                            'assets/images/user.png',
+                            color: Color(0xff8B8C98),
+                            height: screen.heightConverter(140),
+                            width: screen.widthConverter(140),
+                            fit: BoxFit.fill,
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                screen.aspectRatioConverter(10))),
+                            child: Image.network(
+                              user.avatar,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                     name: Text(
                       user.name,
                       overflow: TextOverflow.ellipsis,
@@ -84,15 +95,26 @@ class AlreadyLogedIn extends StatelessWidget {
                 email: InfoLine(
                   iconData: Icons.email,
                   child: Text(
-                    user.email,
+                    user.email.toString(),
                     style: textTheme.subtitle,
                     // maxLines: 1,
                   ),
                 ),
-                image: Image.network(
-                  user.avatar,
-                  fit: BoxFit.cover,
-                ),
+                image: user.avatar == null
+                    ? Image.asset(
+                        'assets/images/user.png',
+                        color: Color(0xff8B8C98),
+                        height: screen.heightConverter(140),
+                        width: screen.widthConverter(140),
+                        fit: BoxFit.cover,
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        child: Image.network(
+                          user.avatar,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                 name: Text(
                   user.name,
                   overflow: TextOverflow.ellipsis,

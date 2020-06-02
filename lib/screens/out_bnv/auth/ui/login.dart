@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:m/commons/utils/localization/localization.dart';
-import 'package:m/commons/utils/methods.dart';
 import 'package:m/commons/utils/screen.dart';
-import 'package:m/commons/widgets/text_field.dart';
 import 'package:m/screens/out_bnv/auth/validators.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/email.dart';
 import 'package:m/screens/out_bnv/auth/widgets/text_fields/password.dart';
 import 'package:provider/provider.dart';
 
 import '../logic.dart';
-import 'forget.dart';
 
 class Login extends StatelessWidget {
   static const route = '/login';
@@ -21,6 +18,7 @@ class Login extends StatelessWidget {
     ThemeData themeData = Theme.of(context);
     TextTheme textTheme = themeData.textTheme;
     var localization = Localization.of(context).auth;
+
     return ChangeNotifierProvider(
         create: (_) => AuthLogic(context),
         child: Consumer<AuthLogic>(
@@ -31,10 +29,6 @@ class Login extends StatelessWidget {
                         onPressed: () async {
                           logic.emailController.text = 'hhh@yahoo.com';
                           logic.passwordController.text = 'gaber123';
-
-                          // Methods(context).showProgressDialog();
-                          // await Future.delayed(Duration(seconds: 2));
-                          // Methods(context).hideProgressDialog();
                         },
                         heroTag: '!fds',
                       ),

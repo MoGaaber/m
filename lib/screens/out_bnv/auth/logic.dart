@@ -1,5 +1,3 @@
-import 'dart:wasm';
-
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:m/commons/models/dio_response.dart';
 import 'package:m/commons/utils/localization/localization.dart';
-import 'package:m/commons/utils/methods.dart';
 import 'package:m/constants/apis_url.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/model.dart';
@@ -100,7 +97,7 @@ class AuthLogic with ChangeNotifier {
   Future<void> register(BuildContext context) async {
     waitForName(context, registerFormKey, await registerForm(), ApisUrls.signUp,
         registerMessageHandler, (x) {
-      toLoginPage(context);
+      Navigator.pop(context);
     });
   }
 
