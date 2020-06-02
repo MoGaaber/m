@@ -22,14 +22,19 @@ class ImageWithItsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Screen screen = Provider.of(context);
+
     return InkWell(
       onTap: this.onTap,
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          MyNetworkImage(this.imageUrl),
-          Align(alignment: alignmentGeometry, child: text),
-        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(screen.aspectRatioConverter(10))),
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            MyNetworkImage(this.imageUrl),
+            Align(alignment: alignmentGeometry, child: text),
+          ],
+        ),
       ),
     );
   }

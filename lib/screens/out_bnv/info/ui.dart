@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/commons/widgets/map.dart';
 import 'package:m/commons/widgets/slider.dart';
-import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
 import 'package:m/screens/out_bnv/book_flight/ui.dart';
 import 'package:m/screens/out_bnv/info/logic.dart';
 import 'package:provider/provider.dart';
+
 import '../photo_view/model.dart';
 import '../photo_view/photo_view.dart';
 
@@ -182,7 +181,7 @@ class Info extends StatelessWidget {
                   child: FlatButton(
                     child: Text('Pay Now'),
                     onPressed: () {
-                      Navigator.pushNamed(context, BookFlightRoot.route,
+                      Navigator.pushNamed(context, BookFlight.route,
                           arguments: {
                             'name': horizontalListElement.getTitle,
                             'tourId': horizontalListElement.id

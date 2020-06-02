@@ -44,6 +44,26 @@ class Localization {
         'Filters',
         'Clear Filter'
       ],
+      'book': [
+        'Book This Tour',
+        'Tour',
+        'Date',
+        'Passengers',
+        'Booking',
+        'Passenger',
+        'Done',
+        'Cancel',
+        'Clear',
+        'Adults',
+        'Children',
+        'Infants',
+        'under',
+        'year',
+        'Must select date and passengers',
+        'Something went wrong try again',
+        'Booking is successfully done'
+      ],
+      'globals': ['Wait for loading ..'],
       'more': ['More', 'Less', 'View on map'],
     },
     'ar': {
@@ -71,6 +91,25 @@ class Localization {
         'تأكد من بريدك الإلكتروني',
         'هذا البريد مستخدم من قبل مستخدم آخر'
       ],
+      'book': [
+        'إحجز هذه الرحلة',
+        'الرحلة',
+        'التاريخ',
+        'الركاب',
+        'الحجز',
+        'راكب',
+        'تم',
+        'الغاء',
+        'مسح',
+        'بالغين',
+        'اطفال',
+        'رضع',
+        'عام',
+        'يجب إدخال التاريخ وعدد الركاب',
+        'هناك مشكلة حدثت حاول مرة اخري',
+        'تم الحجز بنجاح'
+      ],
+      'globals': ['.. إنتظر جاري التحميل'],
       'filter': [
         'التصفيات',
         'المدينة',
@@ -88,6 +127,9 @@ class Localization {
   }
 
   List<String> get language => langugeCode['language'];
+  List<String> get globals => langugeCode['globals'];
+  List<String> get book => langugeCode['book'];
+
   List<String> get auth => langugeCode['auth'];
 
   String get search => langugeCode['search'];

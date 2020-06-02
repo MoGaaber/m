@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:m/commons/models/complete_element.dart';
+import 'package:m/screens/bnv/pages/check_out/ui.dart';
+import 'package:m/screens/out_bnv/book_flight/logic.dart';
 import 'package:m/screens/out_bnv/full_screen_map/full_screen_map.dart';
 import 'package:m/screens/out_bnv/language/logic.dart';
 import 'package:m/screens/out_bnv/photo_view/photo_view.dart';
-
 import 'package:provider/provider.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'commons/utils/localization/delegate.dart';
@@ -33,6 +33,10 @@ Future<void> main() async {
   runApp(MultiProvider(child: ContextMateriaApp(), providers: [
     ChangeNotifierProvider(
       create: (BuildContext context) => LanguageLogic(),
+    ),
+    ChangeNotifierProvider(
+      create: (BuildContext context) => BookFlightLogic(),
+      child: BookFlight(),
     ),
     ChangeNotifierProvider(
       create: (BuildContext context) => FilterLogic(),
@@ -108,8 +112,8 @@ class MyApp extends StatelessWidget {
         BnvRoot.route: (_) => BnvRoot(),
         SignUp.route: (_) => SignUp(),
         Login.route: (_) => Login(),
-//        CheckOut.route: (_) => CheckOut(),
-        BookFlightRoot.route: (_) => BookFlightRoot(),
+        CheckOut.route: (_) => CheckOut(),
+        BookFlight.route: (_) => BookFlight(),
         ForgetPassword.route: (_) => ForgetPassword(),
         Filter.route: (_) => Filter(),
         Language.route: (_) => Language(),
