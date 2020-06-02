@@ -1,14 +1,12 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:m/commons/utils/screen.dart';
-import 'package:m/main.dart';
 import 'package:m/screens/bnv/widget/bnv.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
-  static const route = '/splash';
+  static const route = '/';
 
   @override
   _SplashState createState() => _SplashState();
@@ -18,6 +16,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
   @override
   Widget build(BuildContext context) {
     Screen screen = Provider.of(context);
+
     return SafeArea(
         child: Scaffold(
       body: Column(

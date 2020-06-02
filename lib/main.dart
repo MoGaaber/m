@@ -51,6 +51,8 @@ class ContextMateriaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: GlobalKey(),
+      home: MyApp(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         accentColor: Color(0xff005C15),
@@ -81,6 +83,7 @@ class MyApp extends StatelessWidget {
     );
     LanguageLogic languageLogic = Provider.of(context);
     return MaterialApp(
+      navigatorKey: GlobalKey(),
       builder: (BuildContext context, Widget child) {
         CompleteElementModel.context = context;
 
@@ -119,7 +122,6 @@ class MyApp extends StatelessWidget {
         MyPhotoView.route: (_) => MyPhotoView()
       },
       debugShowCheckedModeBanner: false,
-      title: 'Touri',
       initialRoute: Splash.route,
       theme: ThemeData(
         textTheme: TextTheme(
