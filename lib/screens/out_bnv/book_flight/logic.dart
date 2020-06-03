@@ -27,7 +27,7 @@ class BookFlightLogic extends ChangeNotifier {
     this.context = context;
     localization = Localization.of(context).book;
     setPassengersDefault();
-    var year = localization[13];
+    var year = localization[12];
     tiles = [
       PassengetTileModel(localization[9], '16+ $year'),
       PassengetTileModel(localization[10], '2-16 $year'),

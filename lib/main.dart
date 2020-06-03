@@ -82,6 +82,7 @@ class MyApp extends StatelessWidget {
     );
     LanguageLogic languageLogic = Provider.of(context);
     return MaterialApp(
+
       builder: (BuildContext context, Widget child) {
         CompleteElementModel.context = context;
 
@@ -122,6 +123,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Splash.route,
       theme: ThemeData(
+
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(
                 letterSpacing: 0,
