@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/out_bnv/auth/ui/login.dart';
@@ -27,7 +28,9 @@ class BookFlight extends StatelessWidget {
     Map<String, dynamic> data = ModalRoute.of(context).settings.arguments;
     logic.tourId = data['tourId'];
     logic.selectedDate = null;
-
+    var localization = Localization.of(context);
+    var auth = localization.auth;
+    var book = localization.book;
     return Scaffold(
       key: logic.scaffoldKey,
       body: ListView(
@@ -57,7 +60,7 @@ class BookFlight extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, Login.route);
                           },
-                          child: Text('Sign in',
+                          child: Text(auth[1],
                               style: smallButtontextStyle.copyWith(
                                   color: theme.primaryColorDark)),
                         ),
@@ -70,7 +73,7 @@ class BookFlight extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, SignUp.route);
                           },
-                          child: Text('Sign up', style: smallButtontextStyle),
+                          child: Text(auth[0], style: smallButtontextStyle),
                           color: theme.accentColor,
                         ),
                       ),
@@ -80,12 +83,12 @@ class BookFlight extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: screen.heightConverter(20)),
           ),
-          MyField('tour', data['name'], null),
+          MyField(book[1], data['name'], null),
           Selector<BookFlightLogic, String>(
             builder: (BuildContext context, String value, Widget child) =>
                 MyField(
-              'Date',
-              value ?? 'Select Date',
+              book[2],
+              value ?? book[16],
               () {
                 logic.selectDate(context);
               },
@@ -99,7 +102,7 @@ class BookFlight extends StatelessWidget {
                   logic.passengers,
               builder: (BuildContext context, String value, Widget child) =>
                   MyField(
-                    'Passengers',
+                    book[3],
                     value,
                     logic.selectPassengers,
                     isValid: logic.isPassengersValid,
@@ -110,7 +113,7 @@ class BookFlight extends StatelessWidget {
                 top: screen.heightConverter(40)),
             child: FlatButton(
               onPressed: logic.bookTour,
-              child: Text('Booking'),
+              child: Text(book[4]),
               color: theme.accentColor,
             ),
           ),
@@ -137,8 +140,6 @@ class MyField extends StatelessWidget {
     Screen screen = Provider.of(context);
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
-    BookFlightLogic logic =
-        Provider.of<BookFlightLogic>(context, listen: false);
 
     return Padding(
       padding: EdgeInsets.only(bottom: screen.heightConverter(20)),
@@ -152,9 +153,6 @@ class MyField extends StatelessWidget {
         ),
         child: ListTile(
           onTap: this.onTap,
-          // contentPadding: EdgeInsets.symmetric(
-          //     vertical: screen.heightConverter(10),
-          //     horizontal: screen.widthConverter(10)),
           subtitle: Text(
             subTitle,
             style: textTheme.body2,

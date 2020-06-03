@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
         MyPhotoView.route: (_) => MyPhotoView()
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: BnvRoot.route,
+      initialRoute: Splash.route,
       theme: ThemeData(
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(

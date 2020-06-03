@@ -61,7 +61,8 @@ class Localization {
         'year',
         'Must select date and passengers',
         'Something went wrong try again',
-        'Booking is successfully done'
+        'Booking is successfully done',
+        'Select Date'
       ],
       'globals': ['Wait for loading ..'],
       'more': ['More', 'Less', 'View on map'],
@@ -107,7 +108,8 @@ class Localization {
         'عام',
         'يجب إدخال التاريخ وعدد الركاب',
         'هناك مشكلة حدثت حاول مرة اخري',
-        'تم الحجز بنجاح'
+        'تم الحجز بنجاح',
+        'حدد التاريخ'
       ],
       'globals': ['.. إنتظر جاري التحميل'],
       'filter': [

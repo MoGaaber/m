@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/search_field.dart';
@@ -74,6 +75,8 @@ class Trips extends StatelessWidget {
                                 width: screen.widthConverter(300),
                                 left: screen.widthConverter(30),
                                 child: MySearchTextField(
+                                  edgeInsetsGeometry: EdgeInsets.symmetric(
+                                      vertical: 12.h, horizontal: 5.w),
                                   readOnly: true,
                                   onTap: () {
                                     Provider.of<BnvLogic>(context,

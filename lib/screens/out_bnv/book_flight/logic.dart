@@ -17,11 +17,10 @@ class BookFlightLogic extends ChangeNotifier {
   String passengers;
   int tourId;
   List<PassengetTileModel> tiles;
-
   var scaffoldKey = GlobalKey<ScaffoldState>();
   List<String> localization;
   BuildContext context;
-  BookFlightLogic();
+
   void setPassengersDefault() => passengers = '0 ${localization[5]}';
 
   void init(BuildContext context) {
@@ -51,21 +50,25 @@ class BookFlightLogic extends ChangeNotifier {
           'infant_quantity': tiles[2].count,
         });
         await methods.hideProgressDialog();
-
-        Methods.showSnackBar(scaffoldKey, localization[16]);
-      } catch (e) {
         Methods.showSnackBar(scaffoldKey, localization[15]);
+        print(apiRequest.data);
+        print(apiRequest.statusCode);
+        print('objectttt');
+      } catch (e) {
+        Methods.showSnackBar(scaffoldKey, localization[14]);
+        print('15454');
       }
     } else {
-      Methods.showSnackBar(scaffoldKey, localization[14]);
+      Methods.showSnackBar(scaffoldKey, localization[13]);
+      print('huhii');
     }
-//    await methods.showProgressDialog();
   }
 
   Future<void> selectDate(BuildContext context) async {
     var date = await showDatePicker(
         builder: (BuildContext context, Widget child) {
           var theme = Theme.of(context);
+
           return Theme(
             data: ThemeData.light().copyWith(
               primaryColor: theme.accentColor,
@@ -90,13 +93,14 @@ class BookFlightLogic extends ChangeNotifier {
     var formatter = new DateFormat('dd/MM/yyyy');
     if (selectedDate == null) {
       return null;
+    } else {
+      String formattedDate = formatter.format(this.selectedDate);
+      return formattedDate;
     }
-    String formattedDate = formatter.format(this.selectedDate);
-    return formattedDate;
   }
 
   bool get isFormattedDateValid {
-    if (formattedDate == null) {
+    if (selectedDate == null) {
       return false;
     } else {
       return true;

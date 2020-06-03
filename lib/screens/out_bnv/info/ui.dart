@@ -32,6 +32,7 @@ class Info extends StatelessWidget {
     var logic = Provider.of<InfoLogic>(context);
     logic.horizontalListElement = ModalRoute.of(context).settings.arguments;
     var horizontalListElement = logic.horizontalListElement;
+
     return SafeArea(
         child: Scaffold(
       body: CustomScrollView(
@@ -166,14 +167,14 @@ class Info extends StatelessWidget {
                     style: textTheme.body1,
                   ),
                 ),
-                // horizontalListElement.isRelatedEmpty
-                //     ? SizedBox.shrink()
-                //     : Padding(
-                //         child: HorizontalListDash(
-                //           horizontalListElement.related,
-                //         ),
-                //         padding:
-                //             EdgeInsets.only(top: screen.heightConverter(10))),
+//                 horizontalListElement.isRelatedEmpty
+//                     ? SizedBox.shrink()
+//                     : Padding(
+//                         child: HorizontalListDash(
+//                           horizontalListElement.related,
+//                         ),
+//                         padding:
+//                             EdgeInsets.only(top: screen.heightConverter(10))),
                 Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: screen.heightConverter(34.5),

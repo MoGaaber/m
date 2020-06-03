@@ -43,81 +43,89 @@ class MoreOffline extends StatelessWidget {
     var logic = Provider.of<MoreLogic>(context, listen: true);
     Screen screen = Provider.of(context);
     logic.gridViewModel = gridViewModel;
-//    return Scaffold(
-//      body: RefreshIndicator(
-//          onRefresh: () {
-//            return Future.delayed(Duration(seconds: 5));
-//          },
-//          child: Column()),
-//    );
-    return Scaffold(
-        body: NestedScrollViewRefreshIndicator(
-      onRefresh: logic.refresh,
-      child: extended.NestedScrollView(
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) => [
-                    SliverAppBar(
-                      elevation: 0,
-                      backgroundColor: Colors.transparent,
-                      floating: true,
-                      snap: true,
-                      flexibleSpace: FlexibleSpaceBar(
-                        background: Center(
-                          child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: screen.widthConverter(25),
-                                  right: screen.widthConverter(25),
-                                  top: screen.heightConverter(40),
-                                  bottom: screen.heightConverter(0)),
-                              child: MySearchTextField(
-                                onChanged: (String text) =>
-                                    logic.onChanged(context, text),
-                                controller: logic.searchController,
-                                edgeInsetsGeometry: EdgeInsets.symmetric(
-                                    horizontal: screen.widthConverter(5),
-                                    vertical: screen.heightConverter(10)),
-                                readOnly: false,
-                              )),
-                        ),
-                      ),
-                      expandedHeight: screen.heightConverter(130),
-                    )
-                  ],
-          body: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: screen.widthConverter(19),
-                  vertical: screen.heightConverter(20)),
-              child: gridViewModel.castedResponse.isEmpty
-                  ? Center(
-                      child: Text(
-                        'empty',
-                      ),
-                    )
-                  : logic.searchList.isEmpty &&
-                          logic.searchController.text.isNotEmpty
-                      ? Center(child: Text('Empty'))
-                      : GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: logic.searchController.value.text.isEmpty
-                              ? gridViewModel.castedResponse.length
-                              : logic.searchList.length,
-                          physics: BouncingScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: (screen.widthConverter(156) /
-                                screen.heightConverter(194)),
-                            crossAxisSpacing: screen.widthConverter(16),
-                            mainAxisSpacing: screen.heightConverter(13),
-                          ),
-                          itemBuilder: (BuildContext context, int index) {
-                            return MyGridCard(
-                                logic.searchController.value.text.isEmpty
-                                    ? gridViewModel.castedResponse[index]
-                                    : logic.searchList[index]);
-                            // }
-                          }))),
-    ));
+    return gridViewModel.castedResponse.isEmpty
+        ? Scaffold(
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.info,
+                    size: 50.h,
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 30.h)),
+                  Text(
+                    'Sorry this destination is empty now .. try again later',
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+          )
+        : Scaffold(
+            body: NestedScrollViewRefreshIndicator(
+            onRefresh: logic.refresh,
+            child: extended.NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) => [
+                          SliverAppBar(
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            floating: true,
+                            snap: true,
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: Center(
+                                child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: screen.widthConverter(25),
+                                        right: screen.widthConverter(25),
+                                        top: screen.heightConverter(40),
+                                        bottom: screen.heightConverter(0)),
+                                    child: MySearchTextField(
+                                      onChanged: (String text) =>
+                                          logic.onChanged(context, text),
+                                      controller: logic.searchController,
+                                      edgeInsetsGeometry: EdgeInsets.symmetric(
+                                          horizontal: screen.widthConverter(5),
+                                          vertical: screen.heightConverter(10)),
+                                      readOnly: false,
+                                    )),
+                              ),
+                            ),
+                            expandedHeight: screen.heightConverter(130),
+                          )
+                        ],
+                body: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screen.widthConverter(19),
+                        vertical: screen.heightConverter(20)),
+                    child: logic.searchList.isEmpty &&
+                            logic.searchController.text.isNotEmpty
+                        ? Center(child: Text('Empty'))
+                        : GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: logic.searchController.value.text.isEmpty
+                                ? gridViewModel.castedResponse.length
+                                : logic.searchList.length,
+                            physics: BouncingScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: (screen.widthConverter(156) /
+                                  screen.heightConverter(194)),
+                              crossAxisSpacing: screen.widthConverter(16),
+                              mainAxisSpacing: screen.heightConverter(13),
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              return MyGridCard(
+                                  logic.searchController.value.text.isEmpty
+                                      ? gridViewModel.castedResponse[index]
+                                      : logic.searchList[index]);
+                              // }
+                            }))),
+          ));
   }
 }
 
@@ -125,7 +133,6 @@ class MoreOnline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Screen screen = Provider.of(context);
-
     var logic = Provider.of<MoreLogic>(context, listen: false);
     Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments;
     logic.id = arguments['id'];
