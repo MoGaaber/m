@@ -40,10 +40,16 @@ class MoreOffline extends StatelessWidget {
   MoreOffline(this.gridViewModel);
   @override
   Widget build(BuildContext context) {
-    var logic = Provider.of<MoreLogic>(context, listen: false);
+    var logic = Provider.of<MoreLogic>(context, listen: true);
     Screen screen = Provider.of(context);
     logic.gridViewModel = gridViewModel;
-
+//    return Scaffold(
+//      body: RefreshIndicator(
+//          onRefresh: () {
+//            return Future.delayed(Duration(seconds: 5));
+//          },
+//          child: Column()),
+//    );
     return Scaffold(
         body: NestedScrollViewRefreshIndicator(
       onRefresh: logic.refresh,

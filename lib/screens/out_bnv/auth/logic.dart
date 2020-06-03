@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:m/commons/models/dio_response.dart';
 import 'package:m/commons/utils/localization/localization.dart';
+import 'package:m/commons/utils/methods.dart';
 import 'package:m/constants/apis_url.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/model.dart';
@@ -70,7 +71,7 @@ class AuthLogic with ChangeNotifier {
     }
   }
 
-  void waitForName(
+  Future<void> waitForName(
     BuildContext context,
     GlobalKey<FormState> formKey,
     Map<String, dynamic> form,
@@ -95,30 +96,40 @@ class AuthLogic with ChangeNotifier {
   }
 
   Future<void> register(BuildContext context) async {
-    waitForName(context, registerFormKey, await registerForm(), ApisUrls.signUp,
-        registerMessageHandler, (x) {
+    Methods methods = Methods(context);
+    await methods.showProgressDialog();
+    await waitForName(context, registerFormKey, await registerForm(),
+        ApisUrls.signUp, registerMessageHandler, (x) async {
       Navigator.pop(context);
     });
+    await methods.hideProgressDialog();
   }
 
   void toLoginPage(BuildContext context) {
     Navigator.pushReplacementNamed(context, Login.route);
   }
 
-  void login(BuildContext context) => waitForName(
-          context,
-          loginFormKey,
-          {
-            'email': emailController.text,
-            'password': passwordController.text,
-          },
-          ApisUrls.signIn,
-          loginMessageHandler, (x) async {
-        var info = User.fromJsonAfterLogin(x, emailController.text);
-        await sharedPreferences.setString('token', info.token);
-        await sharedPreferences.setBool('isLoggedIn', true);
-        Navigator.pop(context, info);
-      });
+  Future<void> login(BuildContext context) async {
+    Methods methods = Methods(context);
+    await methods.showProgressDialog();
+
+    await waitForName(
+        context,
+        loginFormKey,
+        {
+          'email': emailController.text,
+          'password': passwordController.text,
+        },
+        ApisUrls.signIn,
+        loginMessageHandler, (x) async {
+      var info = User.fromJsonAfterLogin(x, emailController.text);
+      await sharedPreferences.setString('token', info.token);
+      await sharedPreferences.setBool('isLoggedIn', true);
+
+      Navigator.pop(context, info);
+    });
+    await methods.hideProgressDialog();
+  }
 
   void forgetPassword(BuildContext context) => waitForName(
           context,
