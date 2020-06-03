@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/screens/out_bnv/filter/model.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -17,7 +17,6 @@ class Filter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var logic = Provider.of<FilterLogic>(context, listen: false);
-    print('!');
     var screen = Provider.of<Screen>(context);
     ThemeData theme = Theme.of(context);
     TextTheme textTheme = theme.textTheme;
@@ -28,7 +27,6 @@ class Filter extends StatelessWidget {
         selector: (BuildContext, FilterLogic filterLogic) =>
             Tuple2(filterLogic.clearFilterState, filterLogic.apiRequest),
         builder: (BuildContext context, value, Widget child) {
-          print('heeeuu');
           return MyFutureBuilder<List<Response<Map<String, dynamic>>>>(
               request: value.item2,
               empty: Text('networdl'),
@@ -145,15 +143,17 @@ class Filter extends StatelessWidget {
                           color: Theme.of(context).accentColor,
                         ),
                       ),
-                      FlatButton(
-                        onPressed: logic.clearFilter,
-                        child: Text(localization[6]),
-                        textColor: theme.primaryColorDark,
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 30.h, bottom: 50.h),
+                          child: GestureDetector(
+                            onTap: logic.clearFilter,
+                            child: Text(
+                              (localization[6]),
+                            ),
+                          ),
+                        ),
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(
-                        bottom: screen.heightConverter(50),
-                      ))
                     ],
                   ),
                 );

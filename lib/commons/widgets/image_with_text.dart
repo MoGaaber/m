@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +26,8 @@ class ImageWithItsText extends StatelessWidget {
     return InkWell(
       onTap: this.onTap,
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(screen.aspectRatioConverter(10))),
+        borderRadius:
+            BorderRadius.all(Radius.circular(screen.aspectRatioConverter(10))),
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
@@ -69,7 +69,9 @@ class MyNetworkImage extends StatelessWidget {
               ),
             ),
           );
-        } else {}
+        } else {
+          return null;
+        }
       },
     );
     return ClipRRect(

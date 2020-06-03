@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:m/constants/apis_url.dart';
+import 'package:m/screens/out_bnv/more/model.dart';
 import 'package:m/screens/out_bnv/more/ui.dart';
 import 'package:m/screens/out_bnv/more/widgets/gridview.dart';
 
@@ -107,7 +108,7 @@ class FilterLogic extends ChangeNotifier {
         data: FormData.fromMap(getFilterForm));
 
     Navigator.pushNamed(context, MoreRoot.route,
-        arguments: NormalGridView(response.data));
+        arguments: NormalGridView(GridViewModel(context, response.data)));
   }
 
   void attachData(BuildContext context, snapshot) {

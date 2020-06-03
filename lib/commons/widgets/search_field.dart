@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
-
 import 'package:provider/provider.dart';
 
 import 'text_field.dart';
@@ -30,7 +29,7 @@ class MySearchTextField extends StatelessWidget {
       onChanged: this.onChanged,
       onTap: onTap,
       readOnly: readOnly,
-      // contentPadding: this.edgeInsetsGeometry,
+      contentPadding: this.edgeInsetsGeometry,
       color: Colors.white,
       shadow: [
         BoxShadow(

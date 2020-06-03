@@ -39,7 +39,6 @@ Widget myShimmer(
   Screen screen = Provider.of<Screen>(context);
 
   return Shimmer.fromColors(
-    enabled: false,
     child: Container(
       decoration: BoxDecoration(
         borderRadius:

@@ -27,8 +27,6 @@ class AlreadyLogedIn extends StatelessWidget {
 
     var localization = Localization.of(context).profile;
     LanguageLogic languageLogic = Provider.of(context);
-    print(user.avatar);
-    print('!!!!!!!');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[

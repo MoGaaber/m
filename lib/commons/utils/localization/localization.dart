@@ -12,7 +12,7 @@ class Localization {
   static Map<String, Map> _localizedValues = {
     'en': {
       'language': ['Language'],
-      'search': 'Search',
+      'search': ['Search', 'Empty search query .. start type one'],
       'profile': ['Profile', 'Language', 'Log out'],
       'auth': [
         'Login',
@@ -68,7 +68,7 @@ class Localization {
     },
     'ar': {
       'language': ['اللغة'],
-      'search': 'البحث',
+      'search': ['البحث', 'كلمة البحث فارغة .. إبدا فى كتابة واحدة الآن'],
       'profile': ['الملف الشخصي', 'اللغه', 'تسجيل الخروج'],
       'auth': [
         'تسجيل الدخول',
@@ -132,7 +132,7 @@ class Localization {
 
   List<String> get auth => langugeCode['auth'];
 
-  String get search => langugeCode['search'];
+  List<String> get search => langugeCode['search'];
   List<String> get profile => langugeCode['profile'];
   List<String> get filter => langugeCode['filter'];
 }

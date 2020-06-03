@@ -1,10 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
-import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/screens/bnv/pages/profile/logic.dart';
 import 'package:m/screens/bnv/pages/search/logic.dart';
 import 'package:m/screens/bnv/pages/trips/logic.dart';
@@ -68,101 +64,71 @@ class Bnv extends StatelessWidget {
     final screen = (Provider.of<Screen>(context));
     final logic = Provider.of<BnvLogic>(context, listen: false);
 
-    return Selector<BnvLogic, Future<ConnectivityResult>>(
+    return Selector<BnvLogic, Future<bool>>(
+      selector: (BuildContext, BnvLogic bnvLogic) => bnvLogic.realNetConnection,
       builder: (BuildContext context, Future value, Widget child) {
-        return FutureBuilder<ConnectivityResult>(
-          future: logic.netConnection,
+        return FutureBuilder<bool>(
+          future: logic.realNetConnection,
           builder: (BuildContext context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data == ConnectivityResult.none) {
-                return NetworkError(logic.refetchNetConnection);
+              if (!snapshot.data) {
+                return NetworkError(logic.refetchRealNetConnection);
               }
-
-              return Selector<BnvLogic, Future<bool>>(
-                builder: (BuildContext context, Future value, Widget child) {
-                  return FutureBuilder<bool>(
-                    future: logic.realNetConnection,
-                    builder: (BuildContext context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        if (!snapshot.data) {
-                          return NetworkError(logic.refetchRealNetConnection);
-                        }
-                        return Scaffold(
-                          body: MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider(
-                                create: (BuildContext context) => TripsLogic(),
-                              ),
-                              ChangeNotifierProvider(
-                                create: (BuildContext context) =>
-                                    ProfileLogic(),
-                              ),
-                              ChangeNotifierProvider(
-                                create: (_) => SearchLogic(context),
-                              ),
-                            ],
-                            child: PageView.builder(
-                              controller: logic.pageController,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) =>
-                                  logic.bnv[index].body,
-                            ),
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (BuildContext context) => TripsLogic(),
+                  ),
+                  ChangeNotifierProvider(
+                    create: (BuildContext context) => ProfileLogic(),
+                  ),
+                  ChangeNotifierProvider(
+                    create: (_) => SearchLogic(context),
+                  ),
+                ],
+                child: Scaffold(
+                  bottomNavigationBar: Container(
+                    decoration: BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          blurRadius: screen.aspectRatioConverter(10),
+                          spreadRadius: screen.aspectRatioConverter(5),
+                          color: Colors.black.withOpacity(0.1))
+                    ], color: Colors.white),
+                    height: screen.heightConverter(50),
+                    // color: Color(0xffF4F4F4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        for (int i = 0; i < logic.bnv.length; i++)
+                          Selector<BnvLogic, int>(
+                            builder: (BuildContext context, int value,
+                                    Widget child) =>
+                                InkWell(
+                                    child: AnimatedPadding(
+                                      padding: EdgeInsets.only(
+                                          bottom:
+                                              logic.bnv[i].selected ? 10 : 0),
+                                      child: Icon(logic.bnv[i].icon,
+                                          size: screen.heightConverter(22),
+                                          color: logic.bnv[i].color(context)),
+                                      duration: Duration(milliseconds: 100),
+                                    ),
+                                    onTap: () {
+                                      logic.onTap(i, context);
+                                    }),
+                            selector: (_, BnvLogic logic) => logic.currentIndex,
                           ),
-                          bottomNavigationBar: Container(
-                            decoration: BoxDecoration(boxShadow: [
-                              BoxShadow(
-                                  blurRadius: screen.aspectRatioConverter(10),
-                                  spreadRadius: screen.aspectRatioConverter(5),
-                                  color: Colors.black.withOpacity(0.1))
-                            ], color: Colors.white),
-                            height: screen.heightConverter(50),
-                            // color: Color(0xffF4F4F4),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                for (int i = 0; i < logic.bnv.length; i++)
-                                  Selector<BnvLogic, int>(
-                                    builder: (BuildContext context, int value,
-                                            Widget child) =>
-                                        InkWell(
-                                            child: AnimatedPadding(
-                                              padding: EdgeInsets.only(
-                                                  bottom: logic.bnv[i].selected
-                                                      ? 10
-                                                      : 0),
-                                              child: Icon(logic.bnv[i].icon,
-                                                  size: screen
-                                                      .heightConverter(22),
-                                                  color: logic.bnv[i]
-                                                      .color(context)),
-                                              duration:
-                                                  Duration(milliseconds: 100),
-                                            ),
-                                            onTap: () {
-                                              logic.onTap(i, context);
-                                            }),
-                                    selector: (_, BnvLogic logic) =>
-                                        logic.currentIndex,
-                                  ),
-                              ],
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Scaffold(
-                          body: Center(
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                  );
-                },
-                selector: (BuildContext, BnvLogic bnvLogic) =>
-                    bnvLogic.realNetConnection,
+                      ],
+                    ),
+                  ),
+                  body: PageView.builder(
+                    controller: logic.pageController,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) =>
+                        logic.bnv[index].body,
+                  ),
+                ),
               );
             } else {
               return Scaffold(
@@ -176,7 +142,6 @@ class Bnv extends StatelessWidget {
           },
         );
       },
-      selector: (BuildContext, BnvLogic bnvLogic) => bnvLogic.netConnection,
     );
   }
 }

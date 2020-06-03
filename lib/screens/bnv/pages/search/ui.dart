@@ -1,16 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:m/commons/models/complete_element.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/text_field.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
-import 'package:m/constants/constants.dart';
 import 'package:m/screens/bnv/pages/search/image.dart';
 import 'package:m/screens/bnv/pages/search/model.dart';
-import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
-import 'package:m/screens/bnv/widget/logic.dart';
 import 'package:m/screens/out_bnv/info/ui.dart';
 import 'package:provider/provider.dart';
 
@@ -40,6 +38,7 @@ class Search extends StatelessWidget {
       context,
     );
     var logic = Provider.of<SearchLogic>(context, listen: true);
+    var localization = Localization.of(context).search;
     return Padding(
       padding: EdgeInsets.only(
           top: screen.heightConverter(10),
@@ -50,7 +49,7 @@ class Search extends StatelessWidget {
           Directionality(
             textDirection: logic.isEn ? TextDirection.ltr : TextDirection.rtl,
             child: MyTextField(
-              Localization.of(context).search,
+              localization[0],
               onChanged: (input) {
                 logic.onChangeSearchText(context, input);
               },
@@ -70,7 +69,17 @@ class Search extends StatelessWidget {
           Padding(padding: EdgeInsets.only(top: screen.heightConverter(16))),
           Expanded(
               child: logic.textEditingController.text.isEmpty
-                  ? Center(child: Text('empty query'))
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          FontAwesomeIcons.searchMinus,
+                          size: 60.h,
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 20.h)),
+                        Text(localization[1]),
+                      ],
+                    )
                   : MyFutureBuilder<Response<Map<String, dynamic>>>(
                       request: logic.getSearchResult,
                       empty: Text('networdl'),

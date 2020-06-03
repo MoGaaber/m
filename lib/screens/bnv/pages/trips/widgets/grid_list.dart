@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:m/COMMONS/widgets/title_and_show_more.dart';
@@ -7,11 +5,8 @@ import 'package:m/commons/models/image_and_text._model.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
-import 'package:m/constants/apis_url.dart';
 import 'package:m/screens/bnv/pages/trips/models/grid_list.dart';
-import 'package:m/screens/out_bnv/more/logic.dart';
 import 'package:m/screens/out_bnv/more/ui.dart';
-import 'package:m/screens/out_bnv/more/widgets/grid_view_online.dart';
 import 'package:provider/provider.dart';
 
 import '../logic.dart';
@@ -84,8 +79,7 @@ Widget gridViewItem(
   TextTheme textTheme = theme.textTheme;
   return ImageWithItsText(
     onTap: () {
-      Navigator.pushNamed(context, MoreRoot.route,
-          arguments: GridViewOnline(data[index].id));
+      Navigator.pushNamed(context, MoreRoot.route, arguments: (data[index].id));
     },
     imageUrl: data[index].mainImage,
     alignmentGeometry: Alignment(0, 0.90),
