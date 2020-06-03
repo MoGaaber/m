@@ -79,7 +79,9 @@ Widget gridViewItem(
   TextTheme textTheme = theme.textTheme;
   return ImageWithItsText(
     onTap: () {
-      Navigator.pushNamed(context, MoreRoot.route, arguments: (data[index].id));
+      Navigator.pushNamed(context, MoreRoot.route,
+          arguments: {'id': data[index].id, 'widget': MoreOnline()});
+      ;
     },
     imageUrl: data[index].mainImage,
     alignmentGeometry: Alignment(0, 0.90),

@@ -21,7 +21,7 @@ class Methods {
   }
 
   ProgressDialog get progressDialog =>
-      ProgressDialog(context, isDismissible: true)
+      ProgressDialog(context, isDismissible: false)
         ..style(
             message: Localization.of(context).globals[0],
             progressWidget: Center(

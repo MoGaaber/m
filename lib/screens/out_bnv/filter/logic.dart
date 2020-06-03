@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:m/commons/utils/methods.dart';
 import 'package:m/constants/apis_url.dart';
 import 'package:m/screens/out_bnv/more/model.dart';
 import 'package:m/screens/out_bnv/more/ui.dart';
-import 'package:m/screens/out_bnv/more/widgets/gridview.dart';
 
 import 'model.dart';
 
@@ -102,13 +102,17 @@ class FilterLogic extends ChangeNotifier {
   }
 
   Future<void> filter(BuildContext context) async {
+    var methods = Methods(context);
+    methods.showProgressDialog();
     Response<Map<String, dynamic>> response = await Dio().post(
         ApisUrls.searchAndFilter,
         options: Options(),
         data: FormData.fromMap(getFilterForm));
+    methods.hideProgressDialog();
 
-    Navigator.pushNamed(context, MoreRoot.route,
-        arguments: NormalGridView(GridViewModel(context, response.data)));
+    Navigator.pushNamed(context, MoreRoot.route, arguments: {
+      'widget': MoreOffline(GridViewModel(context, response.data))
+    });
   }
 
   void attachData(BuildContext context, snapshot) {

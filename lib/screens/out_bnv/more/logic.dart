@@ -15,14 +15,9 @@ class MoreLogic extends ChangeNotifier {
   GridViewModel gridViewModel;
   FutureBuilderStatus futureBuilderStatus;
   String firstLetter;
-
+  int id;
   var searchList = List<CompleteElementModel>();
   Future<Response<Map<String, dynamic>>> request;
-  int id;
-  MoreLogic(this.id) {
-    request = getRequest();
-  }
-
   Future<Response<Map<String, dynamic>>> getRequest() async {
     return await Dio().get(ApisUrls.more + '/$id');
   }
