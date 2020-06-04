@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/commons/widgets/map.dart';
@@ -158,7 +159,6 @@ class Info extends StatelessWidget {
                           ],
                         ),
                       ),
-
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: screen.widthConverter(18.5)),
@@ -167,20 +167,12 @@ class Info extends StatelessWidget {
                     style: textTheme.body1,
                   ),
                 ),
-//                 horizontalListElement.isRelatedEmpty
-//                     ? SizedBox.shrink()
-//                     : Padding(
-//                         child: HorizontalListDash(
-//                           horizontalListElement.related,
-//                         ),
-//                         padding:
-//                             EdgeInsets.only(top: screen.heightConverter(10))),
                 Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: screen.heightConverter(34.5),
                       horizontal: screen.widthConverter(18.5)),
                   child: FlatButton(
-                    child: Text('Pay Now'),
+                    child: Text(Localization.of(context).info[0]),
                     onPressed: () {
                       Navigator.pushNamed(context, BookFlight.route,
                           arguments: {
@@ -201,6 +193,17 @@ class Info extends StatelessWidget {
 }
 
 /*
+
+
+               //                 horizontalListElement.isRelatedEmpty
+//                     ? SizedBox.shrink()
+//                     : Padding(
+//                         child: HorizontalListDash(
+//                           horizontalListElement.related,
+//                         ),
+//                         padding:
+//                             EdgeInsets.only(top: screen.heightConverter(10))),
+
                 related.isEmpty
                     ? SizedBox.shrink()
                     : Column(

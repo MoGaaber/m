@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/search_field.dart';
-import 'package:m/screens/bnv/pages/trips/widgets/grid_list.dart';
+import 'package:m/screens/bnv/pages/trips/widgets/grid_cities_list.dart';
+import 'package:m/screens/bnv/pages/trips/widgets/grid_trips_list.dart';
 import 'package:m/screens/bnv/pages/trips/widgets/hiroz_list.dart';
 import 'package:m/screens/bnv/widget/bnv.dart';
 import 'package:m/screens/bnv/widget/logic.dart';
@@ -95,7 +96,7 @@ class Trips extends StatelessWidget {
                     HorizontalList(logic.getPopular, horizontalListViewItem),
                     HorizontalList(
                         logic.getRecommended, horizontalListViewItem),
-                    HorizontalList(logic.getWonderful, horizontalListViewItem),
+                    GridTripsList(),
                     Padding(
                         padding:
                             EdgeInsets.only(bottom: screen.heightConverter(50)))

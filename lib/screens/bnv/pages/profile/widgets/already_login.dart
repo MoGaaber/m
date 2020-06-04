@@ -39,7 +39,6 @@ class AlreadyLogedIn extends StatelessWidget {
                 fullResponse: (snapshot) {
                   User user = User.fromJson(snapshot.data['success']);
                   print(user.token);
-                  print('!!!!!!g[pkp[fdkp[fgk');
                   print(user.avatar);
 
                   return UserInfo(

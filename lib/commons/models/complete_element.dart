@@ -4,7 +4,7 @@ import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/methods.dart';
 
 class CompleteElementModel {
-  String lat;
+  String lat, adultPrice;
   int id;
   String lon;
   List otherImages;
@@ -12,7 +12,7 @@ class CompleteElementModel {
   List translations;
   List related = [];
   bool toggleMoreLess = true;
-  String adultPrice;
+
   static BuildContext context;
   static String languageCode = deviceLanguageCode;
 

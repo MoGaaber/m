@@ -10,7 +10,7 @@ import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/grid_card.dart';
 import 'package:m/commons/widgets/search_field.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
-import 'package:m/screens/bnv/pages/trips/widgets/grid_list.dart';
+import 'package:m/screens/bnv/pages/trips/widgets/grid_cities_list.dart';
 import 'package:m/screens/bnv/widget/logic.dart';
 import 'package:m/screens/out_bnv/more/widgets/gridview.dart';
 import 'package:provider/provider.dart';

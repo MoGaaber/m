@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'logic.dart';
 
+//
 class BookFlight extends StatelessWidget {
   static const route = '/book';
 
@@ -137,6 +138,8 @@ class MyField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var parsedDate = DateTime.parse('2020-01-28 00:00:00');
+    print(parsedDate.year);
     Screen screen = Provider.of(context);
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;

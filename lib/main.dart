@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m/commons/models/complete_element.dart';
 import 'package:m/screens/bnv/pages/check_out/ui.dart';
 import 'package:m/screens/out_bnv/book_flight/logic.dart';
@@ -9,8 +12,10 @@ import 'package:m/screens/out_bnv/language/logic.dart';
 import 'package:m/screens/out_bnv/photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xml/xml.dart';
 
 import 'commons/utils/localization/delegate.dart';
+import 'commons/utils/localization/localization.dart';
 import 'commons/utils/screen.dart';
 import 'commons/widgets/map.dart';
 import 'commons/widgets/scroll_behavior.dart';
@@ -50,7 +55,21 @@ Future<void> main() async {
 class ContextMateriaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var languageCode = sharedPreferences.getString('languageCode');
+
     return MaterialApp(
+      localizationsDelegates: [
+        const LocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      locale: languageCode == null
+          ? null
+          : Locale.fromSubtags(languageCode: languageCode),
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('ar', ''),
+      ],
       home: MyApp(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -74,15 +93,16 @@ class MyApp extends StatelessWidget {
     var languageCode = sharedPreferences.getString('languageCode');
     screen.size = MediaQuery.of(context).size;
     ScreenUtil screenUtil = ScreenUtil();
+    var isAr = Localization.of(context).locale.languageCode == 'ar';
+    var arabicFontFamily = GoogleFonts.tajawal().fontFamily;
     var myCommontTextStyle = TextStyle(
-      fontFamily: 'SFUIText',
+      fontFamily: isAr ? arabicFontFamily : 'SFUIText',
       fontWeight: FontWeight.w500,
       color: Color(0xff23243C),
       fontSize: screenUtil.setSp(17),
     );
     LanguageLogic languageLogic = Provider.of(context);
     return MaterialApp(
-
       builder: (BuildContext context, Widget child) {
         CompleteElementModel.context = context;
 
@@ -106,6 +126,7 @@ class MyApp extends StatelessWidget {
         const Locale('ar', ''),
       ],
       routes: {
+        Countries.route: (_) => Countries(),
         MyMap.route: (_) => FullScreenMap(),
         Splash.route: (_) => Splash(),
         MoreRoot.route: (_) => MoreRoot(),
@@ -113,17 +134,18 @@ class MyApp extends StatelessWidget {
         BnvRoot.route: (_) => BnvRoot(),
         SignUp.route: (_) => SignUp(),
         Login.route: (_) => Login(),
-        CheckOut.route: (_) => CheckOut(),
+        CheckOutRoot.route: (_) => CheckOutRoot(),
         BookFlight.route: (_) => BookFlight(),
         ForgetPassword.route: (_) => ForgetPassword(),
         Filter.route: (_) => Filter(),
         Language.route: (_) => Language(),
-        MyPhotoView.route: (_) => MyPhotoView()
+        MyPhotoView.route: (_) => MyPhotoView(),
+        Test.route: (_) => Test(),
+        MyWebView.route: (_) => MyWebView()
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: Splash.route,
+      initialRoute: Countries.route,
       theme: ThemeData(
-
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(
                 letterSpacing: 0,
@@ -143,7 +165,7 @@ class MyApp extends StatelessWidget {
             display2: TextStyle(
                 color: Color(0xff24253D),
                 fontSize: screenUtil.setSp(28),
-                fontFamily: 'OpenSans',
+                fontFamily: isAr ? arabicFontFamily : 'OpenSans',
                 fontWeight: FontWeight.w500)),
         accentColor: Color(0xff005C15),
         primaryColor: Colors.white,
@@ -167,11 +189,103 @@ class MyApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
-          height: screen.heightConverter(70),
+          height: screen.heightConverter(50),
           // minWidth: screen.widthConverter(300),
           colorScheme: ColorScheme.light(primary: Colors.green),
         ),
       ),
+    );
+  }
+}
+
+class Test extends StatelessWidget {
+  static const route = 'test';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        var respose = await Dio().post(
+          'https://secure.innovatepayments.com/gateway/mobile.xml',
+          data: (''' 
+          <?xml version="1.0" encoding="UTF-8"?>
+<mobile>
+  <store>23065</store>
+  <key>QTtww-nKJG#MvXqC</key> 
+  <device>
+    <type>hello</type>
+    <id>world</id>
+  </device>
+  <app>
+    <name>test</name>
+    <version>2</version>
+    <user>what</user>
+    <id>why</id>
+  </app>
+  <tran>
+    <test>1</test>
+    <type>paypage</type>
+    <class>cont</class>
+    <cartid>444444</cartid>
+    <description>uuuuuu</description>
+    <currency>sar</currency>
+    <amount>200.00</amount>
+    <ref></ref>
+  </tran>
+  <billing>
+    <name>
+      <title>mmm</title>
+      <first>Mohamed</first>
+      <last>Gaber</last>
+    </name>
+    <address>
+      <line1>Street address – line 1 (Note 13)</line1>
+      <line2>Street address – line 2</line2>
+      <line3>Street address – line 3</line3>
+      <city>alexanderia</city>
+      <region>agamy</region>
+      <country>EG</country>
+      <zip>555457</zip>
+    </address>
+    <email>mohamedgaber523@gmail.com</email>
+  </billing>
+</mobile>
+
+
+'''),
+          options: Options(
+              headers: {'Content-Type': 'application/xml'},
+              contentType: 'application/xml'),
+        );
+        print(respose.data);
+        var xml = XmlDocument.parse(respose.data);
+        var url = (xml
+            .getElement('mobile')
+            .getElement('webview')
+            .getElement('start')
+            .text);
+        Navigator.pushNamed(context, MyWebView.route, arguments: url);
+      }),
+    );
+  }
+}
+
+class MyWebView extends StatelessWidget {
+  static const route = 'webview';
+  @override
+  Widget build(BuildContext context) {
+    var arguments = ModalRoute.of(context).settings.arguments;
+    return WebviewScaffold(
+      scrollBar: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.h),
+        child: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Colors.green,
+        ),
+      ),
+      url: arguments,
+      withJavascript: true,
+      resizeToAvoidBottomInset: true,
     );
   }
 }

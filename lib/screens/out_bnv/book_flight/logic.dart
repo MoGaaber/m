@@ -9,6 +9,7 @@ import 'package:m/commons/utils/methods.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/scroll_behavior.dart';
 import 'package:m/constants/apis_url.dart';
+import 'package:m/screens/bnv/pages/check_out/ui.dart';
 import 'package:m/screens/out_bnv/book_flight/ui.dart';
 import 'package:provider/provider.dart';
 
@@ -41,19 +42,21 @@ class BookFlightLogic extends ChangeNotifier {
     if (isValid) {
       try {
         await methods.showProgressDialog();
-        var apiRequest =
-            await Dio().post(ApisUrls.book, options: Options(), data: {
-          'tour': tourId,
-          'starts_at': formattedDate,
-          'adult_quantity': tiles[0].count,
-          'child_quantity': tiles[1].count,
-          'infant_quantity': tiles[2].count,
-        });
+        var apiRequest = await Dio().post<Map<String, dynamic>>(ApisUrls.book,
+            options: Options(),
+            data: {
+              'tour': tourId,
+              'starts_at': formattedDate,
+              'adult_quantity': tiles[0].count,
+              'child_quantity': tiles[1].count,
+              'infant_quantity': tiles[2].count,
+            });
         await methods.hideProgressDialog();
-        Methods.showSnackBar(scaffoldKey, localization[15]);
-        print(apiRequest.data);
-        print(apiRequest.statusCode);
-        print('objectttt');
+        var response = apiRequest.data;
+        var rootPrice = response['success']['original']['success'];
+        var totalPrice = rootPrice[rootPrice.keys.toList()[0]]['price'];
+        Navigator.pushNamed(context, CheckOutRoot.route,
+            arguments: totalPrice.toString());
       } catch (e) {
         Methods.showSnackBar(scaffoldKey, localization[14]);
         print('15454');
@@ -65,27 +68,35 @@ class BookFlightLogic extends ChangeNotifier {
   }
 
   Future<void> selectDate(BuildContext context) async {
-    var date = await showDatePicker(
-        builder: (BuildContext context, Widget child) {
-          var theme = Theme.of(context);
+    var from = DateTime.parse("2020-01-15 00:00:00");
+    var to = DateTime.parse("2020-01-30 00:00:00");
+    try {
+      var date = await showDatePicker(
+          builder: (BuildContext context, Widget child) {
+            var theme = Theme.of(context);
+            return Theme(
+              data: ThemeData.light().copyWith(
+                textTheme: TextTheme(),
+                primaryColor: theme.accentColor,
+                accentColor: theme.accentColor,
+                colorScheme: ColorScheme.light(primary: theme.accentColor),
+                buttonTheme:
+                    ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              ),
+              child: child,
+            );
+          },
+          context: context,
+          initialDate: selectedDate ?? DateTime.now(),
+          firstDate: DateTime(2019),
+          lastDate: DateTime(2025));
 
-          return Theme(
-            data: ThemeData.light().copyWith(
-              primaryColor: theme.accentColor,
-              accentColor: theme.accentColor,
-              colorScheme: ColorScheme.light(primary: theme.accentColor),
-              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
-            ),
-            child: child,
-          );
-        },
-        context: context,
-        initialDate: selectedDate ?? DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2050));
-    if (date != null) {
-      this.selectedDate = date;
-      notifyListeners();
+      if (date != null) {
+        this.selectedDate = date;
+        notifyListeners();
+      }
+    } catch (e) {
+      print('invalid');
     }
   }
 

@@ -6,7 +6,6 @@ import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/screens/bnv/pages/trips/models/grid_list.dart';
-import 'package:m/screens/out_bnv/more/ui.dart';
 import 'package:provider/provider.dart';
 
 import '../logic.dart';
@@ -73,15 +72,16 @@ class MyGridView extends StatelessWidget {
   }
 }
 
-Widget gridViewItem(
-    {BuildContext context, List<dynamic> data, int index, void cast}) {
+Widget gridViewItem({BuildContext context, List data, int index, void cast}) {
   ThemeData theme = Theme.of(context);
   TextTheme textTheme = theme.textTheme;
+  TripsLogic logic = Provider.of(context);
+//  return MyImage(
+//      data[index].title, data[index].mainImage, data, logic.onTapGridList);
+
   return ImageWithItsText(
     onTap: () {
-      Navigator.pushNamed(context, MoreRoot.route,
-          arguments: {'id': data[index].id, 'widget': MoreOnline()});
-      ;
+      logic.onTapGridList(context, data[index].id);
     },
     imageUrl: data[index].mainImage,
     alignmentGeometry: Alignment(0, 0.90),

@@ -5,16 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:m/commons/models/complete_element.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
-import 'package:m/commons/widgets/image_with_text.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
-import 'package:m/constants/apis_url.dart';
-import 'package:m/screens/bnv/pages/search/image.dart';
-import 'package:m/screens/bnv/pages/search/model.dart';
 import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
-import 'package:m/screens/bnv/pages/trips/widgets/carousel_list.dart';
-import 'package:m/screens/out_bnv/info/ui.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../logic.dart';
 
 class HorizontalList extends StatelessWidget {
@@ -37,7 +31,6 @@ class HorizontalList extends StatelessWidget {
         fullResponse: (snapshot) {
           HorizontalListElements horizontalListModel =
               HorizontalListElements(context, snapshot.data);
-
           return ListTitle(
               Text(horizontalListModel.header, style: textTheme.body2),
               MyHorizontalListView(
@@ -65,8 +58,6 @@ class HorizontalList extends StatelessWidget {
   }
 }
 
-/*
-*/
 class MyHorizontalListView extends StatelessWidget {
   final List<CompleteElementModel> data;
   final Item<CompleteElementModel> item;
@@ -109,7 +100,6 @@ class MyHorizontalListView extends StatelessWidget {
     );
   }
 }
-//          Navigator.pushNamed(context, InfoRoot.route, arguments: element);
 
 Widget horizontalListViewItem(
     {BuildContext context,
@@ -121,7 +111,6 @@ Widget horizontalListViewItem(
   var element = data[index];
   var screen = Provider.of<Screen>(context);
   var logic = Provider.of<TripsLogic>(context);
-
   return Material(
     color: Colors.transparent,
     child: InkWell(
@@ -173,6 +162,8 @@ Widget horizontalListViewItem(
                         ),
                       ),
                     );
+                  } else {
+                    return null;
                   }
                 },
               ),
@@ -193,19 +184,3 @@ Widget horizontalListViewItem(
     ),
   );
 }
-/*
-      Material(
-          color: Colors.transparent,
-          child: new InkWell(
-            borderRadius: BorderRadius.all(
-                Radius.circular(screen.aspectRatioConverter(10))),
-            // highlightColor: Color(0xffF6F9FF)
-            hoverColor: Colors.yellow,
-            focusColor: Colors.red,
-            splashColor: Colors.indigo.withOpacity(0.1),
-            highlightColor: Colors.green.withOpacity(0.1),
-            customBorder: RoundedRectangleBorder(side: BorderSide()),
-            onTap: () => Navigator.pushNamed(context, InfoRoot.route,
-                arguments: element),
-          ))
-*/

@@ -64,11 +64,29 @@ class Localization {
         'Booking is successfully done',
         'Select Date'
       ],
+      'info': ['Booking'],
+      'checkOut': [
+        'Check Out',
+        'Credit Card Details',
+        'First Name',
+        'Sur Name',
+        'Billing Information',
+        'Street Address',
+        'City',
+        'Post Code',
+        'Country',
+        'Contact Details',
+        'Email',
+        'Pay Now',
+        'Region',
+        'You should fill all Fields'
+      ],
       'globals': ['Wait for loading ..'],
       'more': ['More', 'Less', 'View on map'],
     },
     'ar': {
       'language': ['اللغة'],
+      'info': ['إحجز'],
       'search': ['البحث', 'كلمة البحث فارغة .. إبدا فى كتابة واحدة الآن'],
       'profile': ['الملف الشخصي', 'اللغه', 'تسجيل الخروج'],
       'auth': [
@@ -91,6 +109,22 @@ class Localization {
         'تأكد من البريد الإلكترونى وكلمة المرور',
         'تأكد من بريدك الإلكتروني',
         'هذا البريد مستخدم من قبل مستخدم آخر'
+      ],
+      'checkOut': [
+        'الدفع',
+        'تفاصيل بطاقة الإئتمان',
+        'الإسم الأول',
+        'اللقب',
+        'معلومات الفواتير',
+        'عنوان الشارع',
+        'المدينة',
+        'الرقم البريدي',
+        'الدولة',
+        'بيانات الإتصال',
+        'البريد الإلكترونى',
+        'إدفع الآن',
+        'المنطقة',
+        'يجب عليك ملأ كل الحقول'
       ],
       'book': [
         'إحجز هذه الرحلة',
@@ -131,10 +165,12 @@ class Localization {
   List<String> get language => langugeCode['language'];
   List<String> get globals => langugeCode['globals'];
   List<String> get book => langugeCode['book'];
+  List<String> get checkOut => langugeCode['checkOut'];
 
   List<String> get auth => langugeCode['auth'];
 
   List<String> get search => langugeCode['search'];
   List<String> get profile => langugeCode['profile'];
   List<String> get filter => langugeCode['filter'];
+  List<String> get info => langugeCode['info'];
 }

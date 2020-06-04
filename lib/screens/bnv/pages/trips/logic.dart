@@ -4,10 +4,9 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:m/commons/models/complete_element.dart';
-import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/constants/apis_url.dart';
-import 'package:m/screens/bnv/pages/trips/models/hiroz_list.dart';
 import 'package:m/screens/out_bnv/info/ui.dart';
+import 'package:m/screens/out_bnv/more/ui.dart';
 
 typedef void Tap(BuildContext context, CompleteElementModel elementModel);
 
@@ -25,9 +24,14 @@ class TripsLogic with ChangeNotifier {
     notifyListeners();
   }
 
-  Tap tap;
   void onTap(BuildContext context, CompleteElementModel elementModel) =>
       Navigator.pushNamed(context, InfoRoot.route, arguments: elementModel);
+
+  void onTapHirozList(BuildContext context, elementModel) =>
+      Navigator.pushNamed(context, InfoRoot.route, arguments: elementModel);
+  void onTapGridList(BuildContext context, id) =>
+      Navigator.pushNamed(context, MoreRoot.route,
+          arguments: {'id': id, 'widget': MoreOnline()});
 
   TripsLogic() {
     getSlider = Dio().get(ApisUrls.slider);
@@ -35,7 +39,6 @@ class TripsLogic with ChangeNotifier {
     getPopular = Dio().get(ApisUrls.popular);
     getWonderful = Dio().get(ApisUrls.topDeals);
     getRecommended = Dio().get(ApisUrls.recommended);
-    tap = onTap;
   }
 
   Future<void> fetchApi() async {
