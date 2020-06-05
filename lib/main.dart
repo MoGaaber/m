@@ -126,7 +126,7 @@ class MyApp extends StatelessWidget {
         const Locale('ar', ''),
       ],
       routes: {
-        Countries.route: (_) => Countries(),
+        CountriesRoot.route: (_) => CountriesRoot(),
         MyMap.route: (_) => FullScreenMap(),
         Splash.route: (_) => Splash(),
         MoreRoot.route: (_) => MoreRoot(),
@@ -144,7 +144,7 @@ class MyApp extends StatelessWidget {
         MyWebView.route: (_) => MyWebView()
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: Countries.route,
+      initialRoute: CountriesRoot.route,
       theme: ThemeData(
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(

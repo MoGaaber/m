@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
@@ -9,7 +10,7 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final Widget trailling;
   final TextEditingController controller;
-  final EdgeInsetsGeometry contentPadding;
+  EdgeInsetsGeometry contentPadding;
   final Color color;
   final TextInputType keyboardType;
   final List<BoxShadow> shadow;
@@ -48,6 +49,7 @@ class MyTextField extends StatelessWidget {
     Screen screen = Provider.of(context);
     ThemeData theme = Theme.of(context);
     TextTheme textTheme = theme.textTheme;
+    contentPadding ??= EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screen.heightConverter(10)),
       child: Container(
@@ -62,7 +64,6 @@ class MyTextField extends StatelessWidget {
               color: Colors.transparent,
               child: TextFormField(
                   textDirection: this.textDirection,
-                  // toolbarOptions: ToolbarOptions(),
                   obscureText: this.obscureText,
                   textAlignVertical: TextAlignVertical.center,
                   controller: this.controller,
@@ -84,15 +85,10 @@ class MyTextField extends StatelessWidget {
                   readOnly: readOnly,
                   decoration: InputDecoration(
                     suffix: this.suffix,
-                    // errorBorder: OutlineInputBorder(
-                    //     borderSide: BorderSide(color: Colors.red),
-                    //     borderRadius: BorderRadius.all(
-                    //         Radius.circular(screen.aspectRatioConverter(10)))),
                     helperText: this.helperText,
                     prefixIcon: prefixIcon,
                     errorStyle: textTheme.subtitle,
                     contentPadding: this.contentPadding,
-
                     hintText: this.hintText,
                     fillColor: this.color,
                     filled: true,
