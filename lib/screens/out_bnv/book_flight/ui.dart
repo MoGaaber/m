@@ -33,12 +33,13 @@ class BookFlight extends StatelessWidget {
     var auth = localization.auth;
     var book = localization.book;
     return Scaffold(
+      appBar: AppBar(),
       key: logic.scaffoldKey,
       body: ListView(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-                top: screen.heightConverter(40),
+                top: screen.heightConverter(20),
                 bottom: screen.heightConverter(20)),
             child: Text(
               logic.localization[0],
@@ -113,7 +114,7 @@ class BookFlight extends StatelessWidget {
                 bottom: screen.heightConverter(20),
                 top: screen.heightConverter(40)),
             child: FlatButton(
-              onPressed: logic.bookTour,
+              onPressed: null,
               child: Text(book[4]),
               color: theme.accentColor,
             ),

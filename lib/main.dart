@@ -56,29 +56,34 @@ class ContextMateriaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var languageCode = sharedPreferences.getString('languageCode');
+    Screen screen = Provider.of<Screen>(context);
 
-    return MaterialApp(
-      localizationsDelegates: [
-        const LocalizationDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      locale: languageCode == null
-          ? null
-          : Locale.fromSubtags(languageCode: languageCode),
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('ar', ''),
-      ],
-      home: MyApp(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        accentColor: Color(0xff005C15),
-        primaryColor: Colors.white,
-        canvasColor: Color(0xffF5F5F5),
-        dividerColor: Color(0xff2E0E0E1),
-        primaryColorDark: Color(0xff24253D),
-        primaryColorLight: Color(0xff91919D),
+    return ScreenUtilInit(
+      designSize: Size(screen.myWidth,screen.myHeight),
+
+      builder:()=> MaterialApp(
+        localizationsDelegates: [
+          const LocalizationDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        locale: languageCode == null
+            ? null
+            : Locale.fromSubtags(languageCode: languageCode),
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('ar', ''),
+        ],
+        home: MyApp(),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          accentColor: Color(0xff005C15),
+          primaryColor: Colors.white,
+          canvasColor: Color(0xffF5F5F5),
+          dividerColor: Color(0xff2E0E0E1),
+          primaryColorDark: Color(0xff24253D),
+          primaryColorLight: Color(0xff91919D),
+        ),
       ),
     );
   }
@@ -88,8 +93,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Screen screen = Provider.of<Screen>(context);
-    ScreenUtil.init(context,
-        height: screen.myHeight, width: screen.myWidth, allowFontScaling: true);
     var languageCode = sharedPreferences.getString('languageCode');
     screen.size = MediaQuery.of(context).size;
     ScreenUtil screenUtil = ScreenUtil();
@@ -144,7 +147,7 @@ class MyApp extends StatelessWidget {
         MyWebView.route: (_) => MyWebView()
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: CountriesRoot.route,
+      initialRoute: Splash.route,
       theme: ThemeData(
         textTheme: TextTheme(
             overline: myCommontTextStyle.copyWith(
@@ -178,10 +181,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(
               display2: TextStyle(
-            fontSize: screenUtil.setSp(28),
-            fontFamily: 'OpenSans',
-            color: Colors.white,
-          )),
+                fontSize: screenUtil.setSp(28),
+                fontFamily: 'OpenSans',
+                color: Colors.white,
+              )),
           iconTheme: IconThemeData(color: Color(0xff005C15), size: 50),
           elevation: 0,
         ),

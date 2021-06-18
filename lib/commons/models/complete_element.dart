@@ -4,8 +4,8 @@ import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/methods.dart';
 
 class CompleteElementModel {
-  String lat, adultPrice;
-  int id;
+  dynamic lat, adultPrice;
+  dynamic id;
   String lon;
   List otherImages;
   String mainImagePath;
@@ -31,6 +31,7 @@ class CompleteElementModel {
       Localization.of(context).locale.languageCode;
 
   Map<String, dynamic> get _getTranslation {
+    
     return translations[
         Methods.customlanguageIndex(translations, languageCode)];
   }

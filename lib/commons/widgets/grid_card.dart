@@ -47,7 +47,7 @@ class MyGridCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                r"$" + data.adultPrice,
+                r"$" + data.adultPrice.toString(),
                 style: textTheme.body1.copyWith(color: Colors.green),
               ),
             ),

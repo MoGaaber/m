@@ -5,6 +5,7 @@ import 'package:m/commons/utils/localization/localization.dart';
 import 'package:m/commons/utils/screen.dart';
 import 'package:m/commons/widgets/future_builder.dart';
 import 'package:m/commons/widgets/title_and_show_more.dart';
+import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/arrow.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/info.dart';
 import 'package:m/screens/bnv/pages/profile/widgets/setting.dart';
@@ -24,7 +25,6 @@ class AlreadyLogedIn extends StatelessWidget {
     User user = logic.user;
     var themeData = Theme.of(context);
     var textTheme = themeData.textTheme;
-
     var localization = Localization.of(context).profile;
     LanguageLogic languageLogic = Provider.of(context);
     return Column(
@@ -38,8 +38,9 @@ class AlreadyLogedIn extends StatelessWidget {
                 networkError: Text('networdl'),
                 fullResponse: (snapshot) {
                   User user = User.fromJson(snapshot.data['success']);
-                  print(user.token);
-                  print(user.avatar);
+                  print(user.avatar.toString()+'FFF');
+
+                  // print(user.avatar);
                   return UserInfo(
                     email: InfoLine(
                       iconData: Icons.email,
@@ -49,18 +50,19 @@ class AlreadyLogedIn extends StatelessWidget {
                         // maxLines: 1,
                       ),
                     ),
-                    image: user.avatar != null
+                    image: user.avatar == null
                         ? Image.asset(
                             'assets/images/user.png',
                             color: Color(0xff8B8C98),
                             height: screen.heightConverter(140),
                             width: screen.widthConverter(140),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           )
                         : ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(
                                 screen.aspectRatioConverter(10))),
                             child: Image.network(
+                             // 'assets/images/user.png',
                               user.avatar,
                               fit: BoxFit.cover,
                             ),
@@ -119,10 +121,10 @@ class AlreadyLogedIn extends StatelessWidget {
                 ),
               ),
         Padding(padding: EdgeInsets.only(top: screen.heightConverter(35))),
-        SettingTile(localization[1],
-            ArrowWithText(languageLogic.selectedLanguageName(context)), () {
-          Navigator.pushNamed(context, Language.route);
-        }),
+        // SettingTile(localization[1],
+        //     ArrowWithText(languageLogic.selectedLanguageName(context)), () {
+        //   Navigator.pushNamed(context, Language.route);
+        // }),
         Padding(
           padding: EdgeInsets.only(
               top: screen.heightConverter(20),

@@ -65,9 +65,7 @@ class MoreOffline extends StatelessWidget {
             ),
           )
         : Scaffold(
-            body: NestedScrollViewRefreshIndicator(
-            onRefresh: logic.refresh,
-            child: extended.NestedScrollView(
+            body: extended.NestedScrollView(
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) => [
                           SliverAppBar(
@@ -125,7 +123,7 @@ class MoreOffline extends StatelessWidget {
                                       : logic.searchList[index]);
                               // }
                             }))),
-          ));
+          );
   }
 }
 
@@ -178,9 +176,7 @@ class MoreOnline extends StatelessWidget {
             );
           }
           return Scaffold(
-              body: NestedScrollViewRefreshIndicator(
-            onRefresh: logic.refresh,
-            child: extended.NestedScrollView(
+            body: extended.NestedScrollView(
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) => [
                           SliverAppBar(
@@ -215,7 +211,7 @@ class MoreOnline extends StatelessWidget {
                         horizontal: screen.widthConverter(19),
                         vertical: screen.heightConverter(20)),
                     child: NormalGridView(gridViewModel))),
-          ));
+          );
         },
       ),
     );
@@ -236,9 +232,7 @@ class More extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-          body: NestedScrollViewRefreshIndicator(
-        onRefresh: logic.refresh,
-        child: extended.NestedScrollView(
+        body: extended.NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) => [
                       SliverAppBar(
@@ -273,7 +267,7 @@ class More extends StatelessWidget {
                   vertical: screen.heightConverter(20)),
               child: body,
             )),
-      )),
+      ),
     );
   }
 }

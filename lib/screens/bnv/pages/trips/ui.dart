@@ -30,7 +30,7 @@ class Trips extends StatelessWidget {
                   snap: true,
                   floating: true,
                   actions: <Widget>[
-                    Padding(
+                 /*   Padding(
                       padding:
                           EdgeInsets.only(right: screen.widthConverter(10)),
                       child: IconButton(
@@ -42,7 +42,7 @@ class Trips extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, Filter.route);
                           }),
-                    )
+                    )*/
                   ],
                   centerTitle: true,
                   title: Image.asset(
@@ -94,9 +94,9 @@ class Trips extends StatelessWidget {
                     ),
                     GridList(),
                     HorizontalList(logic.getPopular, horizontalListViewItem),
-                    HorizontalList(
-                        logic.getRecommended, horizontalListViewItem),
-                    GridTripsList(),
+                    // HorizontalList(
+                    //     logic.getRecommended, horizontalListViewItem),
+                    // GridTripsList(),
                     Padding(
                         padding:
                             EdgeInsets.only(bottom: screen.heightConverter(50)))

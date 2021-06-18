@@ -10,6 +10,8 @@ import 'package:m/constants/apis_url.dart';
 import 'package:m/main.dart';
 import 'package:m/screens/bnv/pages/profile/model.dart';
 import 'package:m/screens/out_bnv/auth/ui/login.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 
 typedef String MessageHandler(BuildContext context);
 typedef void PasswordType();
@@ -36,6 +38,7 @@ class AuthLogic with ChangeNotifier {
   static String email;
   BuildContext context;
   static List<String> localization;
+
   AuthLogic(this.context) {
     localization = Localization.of(context).auth;
   }
@@ -86,11 +89,11 @@ class AuthLogic with ChangeNotifier {
       if (responseStatusCode == 200) {
         action(response.response['success']);
       } else if (responseStatusCode == null) {
-        showSnackBar(localization[15]);
+        showSnackBar(context, localization[15]);
       } else if (responseStatusCode == 401) {
-        showSnackBar(messageHandler(context));
+        showSnackBar(context, messageHandler(context));
       } else {
-        showSnackBar(localization[14]);
+        showSnackBar(context, localization[14]);
       }
     }
   }
@@ -172,7 +175,10 @@ class AuthLogic with ChangeNotifier {
   }
 
   Future<void> pickAvatar() async {
-    avatarPath = await FilePicker.getFilePath(type: FileType.image);
+    final pickedFile = await FilePicker.platform
+        .pickFiles(type: FileType.image, allowMultiple: false);
+
+    avatarPath = pickedFile.paths[0];
     notifyListeners();
   }
 
@@ -182,9 +188,10 @@ class AuthLogic with ChangeNotifier {
   }
 
   static void showSnackBar(
+    BuildContext context,
     String message,
   ) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       // backgroundColor: color,
     ));

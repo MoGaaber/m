@@ -27,8 +27,8 @@ class Login extends StatelessWidget {
                   child: Scaffold(
                       floatingActionButton: FloatingActionButton(
                         onPressed: () async {
-                          logic.emailController.text = 'hhh@yahoo.com';
-                          logic.passwordController.text = 'gaber123';
+                          logic.emailController.text = 'moohammed.gaber@gmail.com';
+                          logic.passwordController.text = '12345678';
                         },
                         heroTag: '!fds',
                       ),

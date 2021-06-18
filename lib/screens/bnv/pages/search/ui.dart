@@ -104,7 +104,7 @@ class Search extends StatelessWidget {
                                 children: <Widget>[
                                   ListTile(
                                     subtitle: Text(
-                                      element.adultPrice + r"$",
+                                      element.adultPrice.toString() + r"$",
                                       style: TextStyle(color: Colors.green),
                                     ),
                                     leading: MyImage(searchResult, index),

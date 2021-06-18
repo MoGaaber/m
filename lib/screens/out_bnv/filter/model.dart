@@ -31,7 +31,7 @@ class FilterModel {
 
   E successResponse<E>(int i) => response[i].data['success'];
 
-  Map<String, dynamic> get successFeatures =>
+  get successFeatures =>
       successResponse<Map<String, dynamic>>(2);
 
   List<Feature> _features(BuildContext context) {

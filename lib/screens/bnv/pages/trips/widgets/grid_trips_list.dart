@@ -66,7 +66,7 @@ class GridTripsList extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  element.adultPrice + r' $',
+                                  element.adultPrice.toString() + r' $',
                                   maxLines: 1,
                                   style: textTheme.body2,
                                 )

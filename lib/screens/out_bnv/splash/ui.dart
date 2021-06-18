@@ -34,10 +34,11 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
           SizedBox(
             height: screen.heightConverter(10),
             width: screen.widthConverter(50),
-            child: Rive(
-              filename: 'assets/flare/load.flr',
-              animation: 'Untitled',
-            ),
+
+            // child: RiveAnimation.asset(
+            //   'assets/flare/load.flr',
+            //   animations: ['Untitled'],
+            // ),
           ),
         ],
       ),
